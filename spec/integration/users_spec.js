@@ -66,7 +66,7 @@ describe("routes : users", () => {
             {
               url: base,
               form: {
-                username: "nouser",
+                username: "user",
                 email: "no",
                 password: "123456789"
               }
