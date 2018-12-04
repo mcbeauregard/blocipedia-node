@@ -39,16 +39,17 @@ describe("routes : users", () => {
             form: {
               username: "jack",
               email: "jack@example.com",
-              password: "123456789"
+              password: "123456789",
+			  passwordConfirmation: "123456789"
             }
           }
     
           request.post(options,
             (err, res, body) => {
+            console.log(body);
               User.findOne({where: {email: "jack@example.com"}})
               .then((user) => {
                 expect(user).not.toBeNull(); // error
-                expect(user.username).toBe("jack");
                 expect(user.email).toBe("jack@example.com");
                 expect(user.id).toBe(1);
                 done();
@@ -68,7 +69,8 @@ describe("routes : users", () => {
               form: {
                 username: "nouser",
                 email: "no",
-                password: "123456789"
+                password: "123456789",
+                passwordConfirmation: "123456789"
               }
             },
             (err, res, body) => {
