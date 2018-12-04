@@ -37,20 +37,19 @@ describe("routes : users", () => {
           const options = {
             url: base,
             form: {
-              username: "jack",
-              email: "jack@example.com",
-              password: "123456789",
-			  passwordConfirmation: "123456789"
+              email: "user@example.com",
+              password: "1234567890",
+			  passwordConfirmation: "1234567890"
             }
           }
     
           request.post(options,
             (err, res, body) => {
             console.log(body);
-              User.findOne({where: {email: "jack@example.com"}})
+              User.findOne({where: {email: "user@example.com"}})
               .then((user) => {
-                expect(user).not.toBeNull(); // error
-                expect(user.email).toBe("jack@example.com");
+                expect(user).toBeTruthy();// error
+                expect(user.email).toBe("user@example.com");
                 expect(user.id).toBe(1);
                 done();
               })
@@ -67,10 +66,9 @@ describe("routes : users", () => {
             {
               url: base,
               form: {
-                username: "nouser",
                 email: "no",
-                password: "123456789",
-                passwordConfirmation: "123456789"
+                password: "1234567890",
+                passwordConfirmation: "1234567890"
               }
             },
             (err, res, body) => {

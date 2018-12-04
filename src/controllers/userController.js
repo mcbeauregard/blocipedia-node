@@ -1,4 +1,4 @@
-const userQueries = require("../db/queries.users.js");
+const userQueries = require("../db/queries.users");
 const passport = require("passport");
 
 module.exports = {
