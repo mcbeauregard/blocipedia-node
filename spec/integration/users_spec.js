@@ -30,12 +30,12 @@ describe("routes : users", () => {
     });
   }); // end of user signup
 
-  describe("POST /users/signup", () => {
+  describe("POST /users", () => {
 
         it("should create a new user with valid values and redirect", (done) => { //
     
           const options = {
-            url: `${base}signup`,
+            url: base,
             form: {
               username: "jack",
               email: "jack@example.com",
@@ -65,7 +65,7 @@ describe("routes : users", () => {
         it("should not create a new user with invalid attributes and redirect", (done) => {
           request.post(
             {
-              url: `${base}signup`,
+              url: base,
               form: {
                 username: "nouser",
                 email: "no",
