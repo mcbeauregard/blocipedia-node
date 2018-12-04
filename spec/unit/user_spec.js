@@ -20,7 +20,7 @@ describe("User", () => {
       User.create({
         username: "jack",
         email: "jack@example.com",
-        password: "1234567890"
+        password: "123456789"
       })
       .then((user) => {
         expect(user.username).toBe("jack");
@@ -36,16 +36,11 @@ describe("User", () => {
 
     it("should not create a user with invalid username, email or password", (done) => {
       User.create({
-        username: "notausername",
-        email: "It's-a me, Mario!",
-        password: "1234567890"
+        username: "nouser",
+        email: "no",
+        password: "123456789"
       })
       .then((user) => {
-
-        // The code in this block will not be evaluated since the validation error
-        // will skip it. Instead, we'll catch the error in the catch block below
-        // and set the expectations there.
-
         done();
       })
       .catch((err) => {
@@ -55,11 +50,10 @@ describe("User", () => {
     });
 
     it("should not create a user with an email already taken", (done) => {
-
       User.create({
         username: "jack",
         email: "jack@example.com",
-        password: "1234567890"
+        password: "123456789"
       })
       .then((user) => {
 
@@ -69,11 +63,6 @@ describe("User", () => {
           password: "nananananananananananananananana BATMAN!"
         })
         .then((user) => {
-
-          // the code in this block will not be evaluated since the validation error
-          // will skip it. Instead, we'll catch the error in the catch block below
-          // and set the expectations there
-
           done();
         })
         .catch((err) => {
@@ -92,3 +81,4 @@ describe("User", () => {
   });
 
 });
+//
