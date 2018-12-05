@@ -21,10 +21,12 @@ describe("User", () => {
 // #2 ensures successful creation  of user with rigth values
     it("should create a User object with a valid email and password", (done) => {
       User.create({
+        username: "user",
         email: "user@example.com",
         password: "1234567890"
       })
       .then((user) => {
+        expect(user.username).toBe("user");
         expect(user.email).toBe("user@example.com");
         expect(user.id).toBe(1);
         done();
@@ -38,6 +40,7 @@ describe("User", () => {
 // #3 fail test if a used has entered invalid values (email/password)
     it("should not create a user with invalid email or password", (done) => {
       User.create({
+        username: "user",
         email: "It's-a me, Mario!",
         password: "1234567890"
       })
@@ -60,12 +63,14 @@ describe("User", () => {
 
 // #5 test validation error by creating a user with duplicate email
       User.create({
+        username: "user",
         email: "user@example.com",
         password: "1234567890"
       })
       .then((user) => {
 
         User.create({
+          username: "user",
           email: "user@example.com",
           password: "nananananananananananananananana BATMAN!"
         })

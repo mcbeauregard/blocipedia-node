@@ -37,6 +37,7 @@ describe("routes : users", () => {
           const options = {
             url: `${base}signup`,
             form: {
+              username: "user",
               email: "user@example.com",
               password: "1234567890",
 			  passwordConfirmation: "1234567890"
@@ -46,7 +47,7 @@ describe("routes : users", () => {
           request.post(options,
             (err, res, body) => {
             console.log(body);
-              User.findOne({where: {email: "user@example.com"}})
+              User.findOne({where: {username: "user"}})
               .then((user) => {
                 expect(user).toBeTruthy();// error
                 expect(user.email).toBe("user@example.com");
@@ -66,6 +67,7 @@ describe("routes : users", () => {
             {
               url: `${base}signup`,
               form: {
+                username: "nouser",
                 email: "no",
                 password: "1234567890",
                 passwordConfirmation: "1234567890"
