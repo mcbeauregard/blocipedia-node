@@ -21,13 +21,13 @@ describe("User", () => {
 // #2 ensures successful creation  of user with rigth values
     it("should create a User object with a valid email and password", (done) => {
       User.create({
-        username: "michelle",
-        email: "michelle@example.com",
-        password: "password"
+        username: "user",
+        email: "user@example.com",
+        password: "1234567890"
       })
       .then((user) => {
-        expect(user.username).toBe("michelle");
-        expect(user.email).toBe("michelle@example.com");
+        expect(user.username).toBe("user");
+        expect(user.email).toBe("user@example.com");
         expect(user.id).toBe(1);
         done();
       })
@@ -40,9 +40,9 @@ describe("User", () => {
 // #3 fail test if a used has entered invalid values (email/password)
     it("should not create a user with invalid email or password", (done) => {
       User.create({
-        username: "michelle",
+        username: "user",
         email: "It's-a me, Mario!",
-        password: "password"
+        password: "1234567890"
       })
       .then((user) => {
 
@@ -63,15 +63,15 @@ describe("User", () => {
 
 // #5 test validation error by creating a user with duplicate email
       User.create({
-        username: "michelle",
-        email: "michelle@example.com",
-        password: "password"
+        username: "user",
+        email: "user@example.com",
+        password: "1234567890"
       })
       .then((user) => {
 
         User.create({
-          username: "michelle",
-          email: "michelle@example.com",
+          username: "user",
+          email: "user@example.com",
           password: "nananananananananananananananana BATMAN!"
         })
         .then((user) => {
