@@ -29,6 +29,16 @@ module.exports = {
     .catch((err) => {
       callback(err);
     })
-  }
-
+  },
+  getUser(id, callback){
+    let result = {};  // result will hold user
+     User.findById(id)
+     .then((user) => {
+      if(!user) {
+         callback(404);
+       } else {
+         result["user"] = user; // stores user
+       }
+     });
+   }
 }
