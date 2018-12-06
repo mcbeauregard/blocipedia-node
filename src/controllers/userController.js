@@ -27,7 +27,7 @@ module.exports = {
     
                  passport.authenticate("local")(req, res, () => {
                    req.flash("notice", "You've successfully signed in!");
-                   sgMail.setApiKey('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');
+                   sgMail.setApiKey('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');
                    sgMail.send(msg);
                    res.redirect("/");
                  })
