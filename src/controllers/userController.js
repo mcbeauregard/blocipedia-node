@@ -3,6 +3,7 @@ const passport = require("passport");
 
 module.exports = {
     create(req, res, next){
+      console.dir(req);
              let newUser = {
                username: req.body.username,
                email: req.body.email,
