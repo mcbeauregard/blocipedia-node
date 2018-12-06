@@ -15,7 +15,7 @@ module.exports = {
 
              userQueries.createUser(newUser, (err, user) => {
               const msg = {
-                  to: req.body.email,
+                  to: newUser.email,
                   from: 'testing@example.com',        
                   subject: 'User Confirmation',
                   text: 'Please confirm your Blocipedia account.',
