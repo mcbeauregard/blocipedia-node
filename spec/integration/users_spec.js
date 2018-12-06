@@ -37,6 +37,7 @@ describe("routes : users", () => {
           const options = {
             url: `${base}signup`,
             form: {
+              username: "user",
               email: "user@example.com",
               password: "1234567890",
 			  passwordConfirmation: "1234567890"
@@ -66,6 +67,7 @@ describe("routes : users", () => {
             {
               url: `${base}signup`,
               form: {
+                username: "user",
                 email: "no",
                 password: "1234567890",
                 passwordConfirmation: "1234567890"
