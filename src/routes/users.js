@@ -8,7 +8,7 @@ const flash = require("express-flash");
 router.get("/users/signup", userController.signUp);
 router.get("/users/signin", userController.signInForm);
 router.post("/users/signin", validation.validateUsers, userController.signIn);
-router.post("/users", validation.validateUsers, userController.create);
+router.post("/users/signup", validation.validateUsers, userController.create);
 //router.post("/users/signup", userController.create);
 router.get("/users/signout", userController.signOut);
 
