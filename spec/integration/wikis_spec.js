@@ -62,7 +62,9 @@ describe("routes : wikis", () => {
             url: `${base}create`,
             form: {
               title: "blink-182 songs",
-              description: "What's your favorite blink-182 song?"
+              body: "What's your favorite blink-182 song?",
+              private: false,
+              userId: this.user.id
             }
           };
     
@@ -72,7 +74,9 @@ describe("routes : wikis", () => {
                 Wiki.findOne({where: {title: "blink-182 songs"}})
                 .then((wiki) => {
                   expect(wiki.title).toBe("blink-182 songs");
-                  expect(wiki.description).toBe("What's your favorite blink-182 song?");
+                  expect(wiki.body).toBe("What's your favorite blink-182 song?");
+                  expect(wiki.private).toBe(false);
+                  expect(wiki.userId).not.toBeNull();     
                   done();
                 })
                 .catch((err) => {
@@ -138,7 +142,9 @@ describe("routes : wikis", () => {
                 url: `${base}${this.wiki.id}/update`,
                 form: {
                   title: "JavaScript Frameworks",
-                  description: "There are a lot of them"
+                  body: "There are a lot of them",
+                  private: false,
+                  userId: this.user.id
                 }
               },
                 (err, res, body) => {
@@ -156,4 +162,5 @@ describe("routes : wikis", () => {
     });
 
 });
-//
+
+// end of wiki spec
