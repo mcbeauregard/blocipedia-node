@@ -63,7 +63,7 @@ destroy(req, res, next){
  },
 
 update(req, res, next){
- wikiQueries.updateWiki(req, req.body, (err, wiki) => { // error
+ wikiQueries.updateWiki(req.params.id, req.body, (err, wiki) => { // error
    if(err || wiki == null){
      res.redirect(401, `/wikis/${req.params.id}/edit`);
    } else {
