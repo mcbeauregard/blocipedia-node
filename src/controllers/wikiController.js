@@ -25,11 +25,9 @@ module.exports = {
     };
     wikiQueries.addWiki(newWiki, (err, wiki) => {
       if (err) {
-        console.log(err);
         res.redirect(500, "/wikis/new");
       } else {
         res.redirect(303, `/wikis/${wiki.id}`);
-        console.log(err);
       }
     });
   },
@@ -37,7 +35,6 @@ module.exports = {
 show(req, res, next){
      wikiQueries.getWiki (req.params.id, (err, wiki) => { // we use re.params because the information we need is in the URL, i.e. the value 5 is stored in ID. We must use ID to define this route.
        if(err || wiki == null){  // check error or wiki with no record
-         console.log(err);
          res.redirect(404, "/"); //  if err or null is found, return a not found status code, and then redirect to root page.
        } else {
          res.render("wikis/show", {wiki}); // otherwise, return the SHOW partial view and pass the wiki record and render it.
@@ -66,11 +63,11 @@ destroy(req, res, next){
  },
 
 update(req, res, next){
- wikiQueries.updateWiki(req, req.body, (err, wiki) => {
+ wikiQueries.updateWiki(req, req.body, (err, wiki) => { // error
    if(err || wiki == null){
      res.redirect(401, `/wikis/${req.params.id}/edit`);
    } else {
-     res.redirect(`/wiki/${req.params.id}`);
+     res.redirect(`/wikis/${wiki.id}`);
    }
  });
 }

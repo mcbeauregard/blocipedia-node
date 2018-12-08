@@ -4,9 +4,7 @@ const User = require("./models").User;
 module.exports = {
 
     getAllWikis(callback){
-        
         return Wiki.all()
-        
         .then((wikis) => {
             callback(null, wikis);
         })
@@ -44,23 +42,22 @@ module.exports = {
             callback(err);
         })
     },
-    updateWiki(req, updatedWiki, callback){
-        return Wiki.findById(id)
+    updateWiki(id, updatedWiki, callback){
+        return Wiki.findById(id) // error
         .then((wiki) => {
-            if(!wiki){
-                return callback("Wiki not found");
-            }
-
-                wiki.update(updatedWiki, {
-                    fields: Object.keys(updatedWiki)
-                })
-                .then(() => {
-                    callback(null, wikis);
-                })
-                .catch((err) => {
-                    callback(err);
-                });
-        });
+          if(!wiki){
+            return callback("Wiki not found");
+          }
+          wiki.update(updatedWiki, {
+            fields: Object.keys(updatedWiki)
+          })
+          .then(() => {
+            callback(null, wiki);
+          })
+          .catch((err) => {
+            callback(err);
+          })
+        })
     }
 }
 //
