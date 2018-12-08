@@ -25,6 +25,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "id",
+          as: "userId",
+        },
+      },
     });
   },
   down: (queryInterface, Sequelize) => {

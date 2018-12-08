@@ -16,19 +16,21 @@ module.exports = {
     res.render("wikis/new");
   },
 
-  create(req, res, next){
-          let newWiki = {
-            title: req.body.title,
-            body: req.body.body,
-          };
-          wikiQueries.addWiki(newWiki, (err, wiki) => {
-            if(err){
-              res.redirect(500, "wikis/new");
-            } else {
-              res.redirect(303, `/wikis/${wiki.id}`);
-            }
-          });
-      },
+  create(req, res, next) {
+    let newWiki = {
+      title: req.body.title,
+      body: req.body.body,
+      userId: req.user.id,
+    };
+    wikiQueries.addWiki(newWiki, (err, wiki) => {
+      if (err) {
+        console.log(err);
+        res.redirect(500, "/wikis/new");
+      } else {
+        res.redirect(303, `/wikis/${wiki.id}`);
+      }
+    });
+  },
 
 show(req, res, next){
      wikiQueries.getWiki (req.params.id, (err, wiki) => { // we use re.params because the information we need is in the URL, i.e. the value 5 is stored in ID. We must use ID to define this route.
