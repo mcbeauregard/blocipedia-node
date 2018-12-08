@@ -4,8 +4,9 @@ const User = require("./models").User;
 module.exports = {
 
     getAllWikis(callback){
+        
         return Wiki.all()
-
+        
         .then((wikis) => {
             callback(null, wikis);
         })

@@ -4,10 +4,6 @@ module.exports = {
     index(req, res, next){
 
     wikiQueries.getAllWikis((err, wikis) => {
-        console.dir(err);
-        console.dir("index wikiContoller error");
-        console.log(e)
-        console.log(e.toString())
         if(err){
           res.redirect(500, "static/index");
         } else {
