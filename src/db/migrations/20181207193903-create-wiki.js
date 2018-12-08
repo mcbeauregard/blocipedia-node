@@ -24,8 +24,8 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
-      /*userId: {
+      },
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -33,7 +33,7 @@ module.exports = {
           key: "id",
           as: "userId",
         },
-      },*/
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
