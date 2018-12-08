@@ -15,18 +15,15 @@ module.exports = {
         })
     },
     addWiki(newWiki, callback){
-        return Wiki.create({
-            title: newWiki.title,
-            body: newWiki.body,
-            userId: newWiki.userId
-        })
+        return Wiki.create(newWiki)
         .then((wiki) => {
-            callback(null, wiki);
+          callback(null, wiki);
         })
         .catch((err) => {
-            callback(err);
+          callback(err);
         })
     },
+
     getWiki(id, callback){
         return Wiki.findById(id)
         .then((wiki) => {
