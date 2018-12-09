@@ -15,15 +15,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       private: {
-        type: Sequelize.BOOLEAN
-      },
-      createdAt: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: false
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -32,7 +26,15 @@ module.exports = {
           model: "Users",
           key: "id",
           as: "userId",
-        },
+        }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
       },
     });
   },
