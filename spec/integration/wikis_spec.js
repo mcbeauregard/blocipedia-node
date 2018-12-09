@@ -16,7 +16,8 @@ describe("routes : wikis", () => {
          User.create({
            username: "wikiuser",
            email: "wikiuser@example.com",
-           password: "01234567"
+           password: "01234567",
+           role: "standard"
          })
          .then((user) => {
             this.user = user;

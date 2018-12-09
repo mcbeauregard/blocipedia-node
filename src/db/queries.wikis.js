@@ -43,7 +43,7 @@ module.exports = {
         })
     },
     updateWiki(id, updatedWiki, callback){
-        return Wiki.findById(id) // error
+        return Wiki.findById(id) 
         .then((wiki) => {
           if(!wiki){
             return callback("Wiki not found");
