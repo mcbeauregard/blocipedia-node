@@ -11,7 +11,7 @@ const faker = require("faker");
      private: false,
      createdAt: new Date(),
      updatedAt: new Date(),
-     userId: 534,
+     userId: 1,
    });
  }
 
