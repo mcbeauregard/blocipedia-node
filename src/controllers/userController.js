@@ -76,39 +76,31 @@ module.exports = {
          });
        },
 
-    /*upgrade(req, res, next){
-      const token = request.body.stripeToken; // Using Express
+    
+       upgrade(req, res, next){
+        const token = req.body.stripeToken;
+        
+        const charge = stripe.charges.create({
+            amount: 1699,
+            currency: 'usd',
+            description: 'Premium plan',
+            source: token,
+        })
 
-      const charge = stripe.charges.create({
-        amount: 17,
-        currency: 'usd',
-        description: 'Premium',
-        source: token,
-      })
+        userQueries.upgradeUserRole(req, (err, result) => {
+            if(err || result.id === undefined){
+                req.flash("notice", "No user found with that ID.");
+                res.redirect("users/show");
+            } else {
+                req.flash("notice", "Thank you for becoming a Premium member!");
+                res.render("users/show", {...result});
+            }
+        })
 
-      userQueries.getUpgrade(req.params.id, (err, result) => {
-        if(err || result.user === undefined){
-          req.flash("notice", "No user found with that ID.");
-          res.redirect("/");
-        } else {
-          res.render("users/show", {...result});
-        }
-      })
-    },*/
+    },
 
-    downgradeForm(req, res, next){
-      userQueries.getUser(req.params.id, (err, user) => {
-        if(err || user === undefined){
-            req.flash("notice", "No user found with that ID.");
-            res.redirect("/");
-        } else {
-            res.render("users/downgrade", {user});
-       }
-    });
- },
- // error
     downgrade(req, res, next){
-      userQueries.updateUserRole(req, (err, result) => {
+      userQueries.downgradeUserRole(req, (err, result) => {
         if(err || result.id === undefined){
             req.flash("notice", "No user found with that ID.");
             res.redirect("users/show");

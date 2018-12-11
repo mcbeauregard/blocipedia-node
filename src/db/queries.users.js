@@ -31,19 +31,26 @@ module.exports = {
        })
    },
 
-    /*updateUserRole(user){
-      User.findOne({where: {email: user.email}}) // error
+   upgradeUserRole(req, callback){
+    return User.findById(req.user.id)
+
+    .then((user) => {
+      if(!user){
+        return callback("User not found");
+      }
+
+      user.update({role: "premium"}, {where: {id: user.id}})
 
       .then((user) => {
-       if(user.role =="standard") {
-          user.update({role: "premium"})
-        } else if (user.role =="premium") {
-            user.update({role: "standard"})
-        }
-       })
-     } */
+        callback(null, user);
+      })
+      .catch((err) => {
+        callback(err);
+      })
+    })
+  },
 
-     updateUserRole(req, callback){
+     downgradeUserRole(req, callback){
       return User.findById(req.user.id)
   
       .then((user) => {
