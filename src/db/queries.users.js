@@ -31,7 +31,7 @@ module.exports = {
        })
    },
 
-    updateUserRole(user){
+    /*updateUserRole(user){
       User.findOne({where: {email: user.email}}) // error
 
       .then((user) => {
@@ -41,5 +41,24 @@ module.exports = {
             user.update({role: "standard"})
         }
        })
-     } 
+     } */
+
+     updateUserRole(req, callback){
+      return User.findById(req.user.id)
+  
+      .then((user) => {
+        if(!user){
+          return callback("User not found");
+        }
+  
+        user.update({role: 0}, {where: {id: user.id}})
+  
+        .then((user) => {
+          callback(null, user);
+        })
+        .catch((err) => {
+          callback(err);
+        })
+      })
+    }
 }

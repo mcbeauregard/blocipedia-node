@@ -96,7 +96,7 @@ module.exports = {
       })
     },*/
 
-    /*downgradeForm(req, res, next){
+    downgradeForm(req, res, next){
       userQueries.getUser(req.params.id, (err, user) => {
         if(err || user === undefined){
             req.flash("notice", "No user found with that ID.");
@@ -105,10 +105,10 @@ module.exports = {
             res.render("users/downgrade", {user});
        }
     });
- },*/
+ },
  // error
     downgrade(req, res, next){
-      userQueries.upgradeUserRole(req, (err, result) => {
+      userQueries.updateUserRole(req, (err, result) => {
         if(err || result.id === undefined){
             req.flash("notice", "No user found with that ID.");
             res.redirect("users/show");
@@ -116,6 +116,7 @@ module.exports = {
             req.flash("notice", "Downgraded to standard membership");
             res.render("users/show", {...result});
         }
+
       })
     },
     
