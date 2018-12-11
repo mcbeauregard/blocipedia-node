@@ -20,15 +20,51 @@ module.exports = {
       callback(err);
     })
   },
-  getUser(id, callback){
-    let result = {};  // result will hold user
+
+   getUser(id, callback){
+     return User.findById(id)
+     .then((user) => {
+      callback(null, user);
+      })
+         .catch((err) => {
+          callback(err);
+       })
+   },
+
+   getUpgrade(id, callback){
      User.findById(id)
      .then((user) => {
+
       if(!user) {
          callback(404);
        } else {
-         result["user"] = user; // stores user
+
+        return user.updateAttributes({
+          role: "premium"
+        });
        }
-     });
-   }
+      })
+           .catch((err) => {
+             callback(err);
+           })
+    },
+
+    getDowngrade(id, callback){
+      User.findById(id)
+      .then((user) => {
+ 
+       if(!user) {
+          callback(404);
+        } else {
+ 
+         return user.updateAttributes({
+           role: "standard"
+         });
+        }
+       })
+            .catch((err) => {
+              callback(err);
+            })
+     },
+       
 }

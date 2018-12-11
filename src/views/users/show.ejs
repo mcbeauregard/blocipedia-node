@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../static/partials/head.ejs %>
+    </head>
+    <body>
+        <% include ../static/partials/navbar.ejs %>
+       <main class="container">
+          <% include ../static/partials/messages.ejs %>
+          <!-- User account info -->
+
+          <h1>Account </h1>
+          <h3>Hello <%= currentUser.username %>!</h3>
+          <p>_______________________________________________________</p>
+          <h3>INFO:</h3>
+          <h4><%= currentUser.email %></h4>
+          <p>_______________________________________________________</p>
+          <h3>CURRENT PLAN:</h3>
+          
+          <!-- END user account info -->
+
+          <!-- upgrade user from standard to premium -->
+          <% if(currentUser && currentUser.isStandard()) { %>
+            <h4>Basic</h4>
+            <header class="jumbotron my-3">
+                <h2>Change plan</h2>
+                <p>To create private wikis, upgrade your account to premium for $16.99/month.</p>
+                <form method="POST" action="/users/<%=currentUser.id %>/upgrade">
+                  <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_44J8a0sLIAfZdvHCbbH5bcxj"
+                    data-amount="1699"
+                    data-name="Test charge"
+                    data-description="Premium upgrade"
+                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                    data-locale="auto">
+                </script>
+                </form>
+            </header>
+
+            <!-- downgrade user from premium to standard -->
+            <% } else if(currentUser && currentUser.isPremium()) { %>
+                <h4>Premium</h4>
+                <header class="jumbotron my-3">
+                    <h2>Change plan</h2>
+                    <p>Switch to basic, and create public wikis for $9.99/month.
+                    Note: You'll no longer have access to your private wikis. </p>
+                    <form  style="display:initial" method="POST" action="/users/<%=currentUser.id %>/downgrade">
+                        <button type="submit" class="btn btn-danger">Go basic</button>
+                    </form>
+                </header>
+            <% } %>
+        </main>
+        <% include ../static/partials/baseScripts.ejs %>
+      </body>
+</html>

@@ -2,6 +2,7 @@ const userQueries = require("../db/queries.users.js");
 const passport = require("passport");
 const User = require("../db/models").User;
 const sgMail = require('@sendgrid/mail');
+const stripe = require("stripe")(process.env.STRIPE_TEST_API_KEY);
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -62,8 +63,57 @@ module.exports = {
         req.logout();
         req.flash("notice", "You've successfully signed out!");
         res.redirect("/");
-      }
+      },
 
+    show(req, res, next){
+         userQueries.getUser(req.params.id, (err, result) => {
+           if(err || result.id === undefined){
+             req.flash("notice", "No user found with that ID.");
+             res.redirect("/");
+           } else {
+             res.render("users/show", {...result});
+           }
+         });
+       },
+
+    upgrade(req, res, next){
+      const token = request.body.stripeToken; // Using Express
+
+      const charge = stripe.charges.create({
+        amount: 17,
+        currency: 'usd',
+        description: 'Premium',
+        source: token,
+      })
+
+      userQueries.getUpgrade(req.params.id, (err, result) => {
+        if(err || result.user === undefined){
+          req.flash("notice", "No user found with that ID.");
+          res.redirect("/");
+        } else {
+          res.render("users/show", {...result});
+        }
+      })
+    },
+
+    downgrade(req, res, next){
+      const token = request.body.stripeToken; // Using Express
+
+      const charge = stripe.refunds.create({
+        charge: 'ch_Y0KMNvE31LL6cWqc8MTA',
+        amount: 1700
+      })
+
+      userQueries.getDowngrade(req.params.id, (err, result) => {
+        if(err || result.user === undefined){
+          req.flash("notice", "No user found with that ID.");
+          res.redirect("/");
+        } else {
+          res.render("users/show", {...result});
+        }
+      })
+    },
+    
   }
 
   
