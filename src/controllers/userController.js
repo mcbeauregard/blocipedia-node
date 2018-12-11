@@ -66,17 +66,17 @@ module.exports = {
       },
 
     show(req, res, next){
-         userQueries.getUser(req.params.id, (err, result) => {
-           if(err || result.id === undefined){
+         userQueries.getUser(req.params.id, (err, user) => {
+           if(err || user === undefined){
              req.flash("notice", "No user found with that ID.");
              res.redirect("/");
            } else {
-             res.render("users/show", {...result});
+             res.render("users/show", {user});
            }
          });
        },
 
-    upgrade(req, res, next){
+    /*upgrade(req, res, next){
       const token = request.body.stripeToken; // Using Express
 
       const charge = stripe.charges.create({
@@ -94,22 +94,27 @@ module.exports = {
           res.render("users/show", {...result});
         }
       })
-    },
+    },*/
 
-    downgrade(req, res, next){
-      const token = request.body.stripeToken; // Using Express
-
-      const charge = stripe.refunds.create({
-        charge: 'ch_Y0KMNvE31LL6cWqc8MTA',
-        amount: 1700
-      })
-
-      userQueries.getDowngrade(req.params.id, (err, result) => {
-        if(err || result.user === undefined){
-          req.flash("notice", "No user found with that ID.");
-          res.redirect("/");
+    /*downgradeForm(req, res, next){
+      userQueries.getUser(req.params.id, (err, user) => {
+        if(err || user === undefined){
+            req.flash("notice", "No user found with that ID.");
+            res.redirect("/");
         } else {
-          res.render("users/show", {...result});
+            res.render("users/downgrade", {user});
+       }
+    });
+ },*/
+ // error
+    downgrade(req, res, next){
+      userQueries.upgradeUserRole(req, (err, result) => {
+        if(err || result.id === undefined){
+            req.flash("notice", "No user found with that ID.");
+            res.redirect("users/show");
+        } else {
+            req.flash("notice", "Downgraded to standard membership");
+            res.render("users/show", {...result});
         }
       })
     },

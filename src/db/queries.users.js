@@ -31,40 +31,15 @@ module.exports = {
        })
    },
 
-   getUpgrade(id, callback){
-     User.findById(id)
-     .then((user) => {
+    updateUserRole(user){
+      User.findOne({where: {email: user.email}}) // error
 
-      if(!user) {
-         callback(404);
-       } else {
-
-        return user.updateAttributes({
-          role: "premium"
-        });
-       }
-      })
-           .catch((err) => {
-             callback(err);
-           })
-    },
-
-    getDowngrade(id, callback){
-      User.findById(id)
       .then((user) => {
- 
-       if(!user) {
-          callback(404);
-        } else {
- 
-         return user.updateAttributes({
-           role: "standard"
-         });
+       if(user.role =="standard") {
+          user.update({role: "premium"})
+        } else if (user.role =="premium") {
+            user.update({role: "standard"})
         }
        })
-            .catch((err) => {
-              callback(err);
-            })
-     },
-       
+     } 
 }
