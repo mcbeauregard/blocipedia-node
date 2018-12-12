@@ -24,7 +24,7 @@
             <h4>Basic</h4>
             <header class="jumbotron my-3">
                 <h2>Change plan</h2>
-                <p>To create private wikis, upgrade your account to premium for $16.99/month.</p>
+                <p>To create private wikis, upgrade your account to premium for $16.99.</p>
                 <form method="POST" action="/users/<%=currentUser.id %>/upgrade">
                   <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -43,7 +43,7 @@
                 <h4>Premium</h4>
                 <header class="jumbotron my-3">
                     <h2>Change plan</h2>
-                    <p>Switch to basic, and create public wikis for $9.99/month.
+                    <p>Switch to basic, and create public wikis for $9.99.
                     Note: You'll no longer have access to your private wikis. </p>
                     <form  style="display:initial" method="POST" action="/users/<%=currentUser.id %>/downgrade">
                         <button type="submit" class="btn btn-danger">Go basic</button>
