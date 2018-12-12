@@ -14,6 +14,11 @@ router.get("/users/signout", userController.signOut);
 
 router.get("/users/:id", userController.show);
 router.post("/users/:id/downgrade", userController.downgrade);
+router.get("/users/downgrade", userController.downgrade);
 router.post("/users/:id/upgrade", userController.upgrade);
+router.get("/users/upgrade", userController.upgrade);
+router.get("/users/payment", userController.payment);
+router.get("/users/paymentFail", userController.paymentFail);
+router.get("/users/downgradeShow", userController.downgradeShow);
 
 module.exports = router;

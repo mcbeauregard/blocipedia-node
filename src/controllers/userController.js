@@ -92,8 +92,8 @@ module.exports = {
                 req.flash("notice", "No user found with that ID.");
                 res.redirect("users/show");
             } else {
-                req.flash("notice", "Thank you for becoming a Premium member!");
-                res.render("users/show", {...result});
+                req.flash("notice", "Thank you for upgrading to the premium plan!");
+                res.render("users/payment", {result});
             }
         })
 
@@ -105,13 +105,24 @@ module.exports = {
             req.flash("notice", "No user found with that ID.");
             res.redirect("users/show");
         } else {
-            req.flash("notice", "Downgraded to standard membership");
-            res.render("users/show", {...result});
+            req.flash("notice", "Success, you've switched to basic plan.");
+            res.render("users/downgradeShow", {result});
         }
 
       })
     },
+
+    downgradeShow(req, res, next){
+      res.render("users/downgradeShow"); 
+    },
+
+    payment(req, res, next){
+      res.render("users/payment"); 
+    },
     
+    paymentFail(req, res, next){
+      res.render("users/paymentFail"); 
+    },
   }
 
   

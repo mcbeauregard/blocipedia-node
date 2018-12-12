@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../static/partials/head.ejs %>
+    </head>
+    <body>
+        <% include ../static/partials/navbar.ejs %>
+       <main class="container">
+          <% include ../static/partials/messages.ejs %>
+          <!-- User account info -->
+          <header class="jumbotron my-3">
+            <h3>We're sorry</h3>
+            <p>Your transaction could not be processed.</p>
+            <p>Please try again.</p>
+            <p>If the problem persists, please contact Blocipedia Customer Success.</p>
+            <p><a href="/show">Try again</a></p>
+          </header>
+        </main>
+        <% include ../static/partials/baseScripts.ejs %>
+      </body>
+</html>
