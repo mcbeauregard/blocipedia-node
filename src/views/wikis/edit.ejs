@@ -19,6 +19,19 @@
           <label for="body">Body</label>
           <textarea rows="4" class="form-control" name="body" placeholder="Enter Body"><%= wiki.body %></textarea>
         </div>
+
+                 <!-- Make private/public button -->
+                 <% if( currentUser.isPremium() || currentUser.isAdmin() ) { %>
+                    <div class="form-group">
+                        <label for="private">Wiki status</label>
+                        <select class="form-control" name="private">
+                            <option value="false">Public wiki</option>
+                            <option value="true">Private wiki</option>
+                        </select>
+                    </div>
+                 <% } %>
+                <!-- Make private/public button -->
+        
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
     </main>

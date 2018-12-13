@@ -11,7 +11,7 @@ const ApplicationPolicy = require("./application");
   }
 
    edit() {
-    return this.new();
+    return this._isStandard() || this._isAdmin() || this._isPremium();
   }
 
    update() {

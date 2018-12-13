@@ -19,9 +19,20 @@
           <label for="body">Body</label>
           <textarea rows="4" class="form-control" name="body" placeholder="Enter Body"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
 
+        <!-- Make private/public button -->
+        <% if( currentUser.isPremium() || currentUser.isAdmin() ) { %>
+          <div class="form-group">
+              <label for="private">Wiki Status</label>
+              <select class="form-control" name="private">
+                    <option value="false">Public wiki</option>
+                    <option value="true">Private wiki</option>
+              </select>
+          </div>
+       <% } %>
+      <!-- Make private/public button -->
+
+      <button type="submit" class="btn btn-primary">Submit</button>
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>

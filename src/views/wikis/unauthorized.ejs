@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+      <% include ../static/partials/messages.ejs %>
+        <h3>You are not authorized to view this page</h3>
+        <p>You do not have permission to view this page using the credentials that you supplied.</p>
+        <p>Return to the <a href="/wikis">wikis page</a></p>
+
+      
+    </main>
+    <% include ../static/partials/baseScripts.ejs %>
+  </body>
+</html>

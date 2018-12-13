@@ -1,4 +1,5 @@
 const userQueries = require("../db/queries.users.js");
+const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const User = require("../db/models").User;
 const sgMail = require('@sendgrid/mail');
@@ -89,8 +90,8 @@ module.exports = {
 
         userQueries.upgradeUserRole(req, (err, result) => {
             if(err || result.id === undefined){
-                req.flash("notice", "No user found with that ID.");
-                res.redirect("users/show");
+                req.flash("notice", "Payment not successful.");
+                res.redirect("users/paymentFail");
             } else {
                 req.flash("notice", "Thank you for upgrading to the premium plan!");
                 res.render("users/payment", {result});
@@ -102,10 +103,11 @@ module.exports = {
     downgrade(req, res, next){
       userQueries.downgradeUserRole(req, (err, result) => {
         if(err || result.id === undefined){
-            req.flash("notice", "No user found with that ID.");
+            req.flash("notice", "Unable to process your request");
             res.redirect("users/show");
         } else {
-            req.flash("notice", "Success, you've switched to basic plan.");
+            wikiQueries.changeWikiToPublic(req.user.dataValues.id);
+            req.flash("notice", "Success, you've switched to the basic plan.");
             res.render("users/downgradeShow", {result});
         }
 

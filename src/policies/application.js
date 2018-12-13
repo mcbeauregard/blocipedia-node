@@ -34,9 +34,9 @@ module.exports = class ApplicationPolicy {
      }
    
      edit() {
-       return this.new() &&
-       this.record && this._isStandard();
-     }
+      return this.new() &&
+      this.record && (this._isStandard() || this._isPremium() || this._isAdmin());
+      }
    
      update() {
        return this.edit();
