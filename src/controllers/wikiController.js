@@ -9,7 +9,6 @@ module.exports = {
         if(err){                
             res.redirect(500, "static/index");
         } else {
-            wiki.body = markdown.toHTML(wiki.body);
             res.render("wikis/index", {wikis});
         }
     })
@@ -55,6 +54,7 @@ show(req, res, next){
        if(err || wiki == null){  // check error or wiki with no record
          res.redirect(404, "/"); //  if err or null is found, return a not found status code, and then redirect to root page.
        } else {
+        wiki.body = markdown.toHTML(wiki.body);
          res.render("wikis/show", {wiki}); // otherwise, return the SHOW partial view and pass the wiki record and render it.
        }
      });
