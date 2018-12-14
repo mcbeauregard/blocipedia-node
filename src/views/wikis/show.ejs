@@ -15,8 +15,9 @@
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
         <% } %>
-      <p><%= wiki.body %></p>
-      <!-- Make private/public button -->
+        <p><%- wiki.body %></p>
+      
+        <!-- Make private/public button -->
       <% if( currentUser.isPremium() || currentUser.isAdmin() ) { %>
         <div class="form-group">
             <label for="private">Wiki Status</label>
@@ -26,6 +27,7 @@
             </select>
         </div>
     <% } %>
+    
     <!-- Make private/public button -->
     </main>
     <% include ../static/partials/baseScripts.ejs %>
