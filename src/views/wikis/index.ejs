@@ -10,6 +10,13 @@
       <% if(currentUser) { %>
         <a href="/wikis/new" class="btn btn-success">New Wiki</a>
         <% } %>
+        <% let name = function findName(users, wiki){ 
+          for(let i in users){
+              if (users[i].id == wiki.userId){
+                  return users[i].username
+              }
+          }
+          } %>
       <ul class="list-group">
 
         <% wikis.forEach((wiki) => { %>
@@ -20,6 +27,7 @@
             </li>
             <% } %>
         <% }) %>
+        
       </ul>
     </main>
   </body>
