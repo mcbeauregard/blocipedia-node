@@ -29,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
       as: "wikis"
     });
 
+    User.hasMany(models.Collaborators, {
+      foreignKey: "userId",
+      as: "collaborators",
+    });
+    
     User.prototype.isStandard = function() {
       return this.role === "standard";
     };

@@ -1,24 +1,17 @@
 const ApplicationPolicy = require("./application");
-
- module.exports = class WikiPolicy extends ApplicationPolicy {
-
-   new() {
-    return this._isStandard() || this._isAdmin() || this._isPremium();
+const collabQueries = require("../db/queries.collaborators.js");
+ module.exports = class CollaboratorPolicy extends ApplicationPolicy {
+   //only show wikis that you are a collaborator on
+  //if you are a standard user you can see private wikis you're collaborating on
+  //private wikis visible to user, admin, and collaborators
+   //has USER and RECORD
+   _isCollaborator() {
+    return collabQueries.isCollab(this.user.id, this.record.id, collab => {
+      if (!collab) {
+        return false;
+      } else {
+        return true;
+      }
+    });
   }
-
-   create() {
-    return this.new();
-  }
-
-   edit() {
-    return this._isStandard() || this._isAdmin() || this._isPremium();
-  }
-
-   update() {
-    return this.edit();
-  }
-  
-   destroy() {
-    return this.update();
-  }
-}
+ }

@@ -1,11 +1,12 @@
 const wikiQueries = require("../db/queries.wikis.js");
 const Authorizer = require("../policies/application");
 const markdown = require( "markdown" ).markdown;
+const User = require("../db/models").User;
 
 module.exports = {
   
   index(req, res, next) {
-    wikiQueries.getAllWikis((err, wikis) => {
+    wikiQueries.getAllWikis(req.user.id, (err, wikis) => {
         if(err){                
             res.redirect(500, "static/index");
         } else {
@@ -50,12 +51,12 @@ module.exports = {
       },
 
 show(req, res, next){
-     wikiQueries.getWiki (req.params.id, (err, wiki) => { // we use re.params because the information we need is in the URL, i.e. the value 5 is stored in ID. We must use ID to define this route.
+     wikiQueries.getWiki (req.params.id, (err, wiki, user) => { // we use re.params because the information we need is in the URL, i.e. the value 5 is stored in ID. We must use ID to define this route.
        if(err || wiki == null){  // check error or wiki with no record
          res.redirect(404, "/"); //  if err or null is found, return a not found status code, and then redirect to root page.
        } else {
         wiki.body = markdown.toHTML(wiki.body);
-         res.render("wikis/show", {wiki}); // otherwise, return the SHOW partial view and pass the wiki record and render it.
+        res.render("wikis/show", {wiki, body, user});// otherwise, return the SHOW partial view and pass the wiki record and render it.
        }
      });
    },

@@ -67,5 +67,20 @@ module.exports = {
           callback(err);
         })
       })
-    }
+    },
+
+    getUserId(userEmail, callback) {
+      return User.find({
+        where: {email: userEmail}
+      })
+      .then( user => {
+        if (!user) {
+          return callback("User not found");
+        }
+        callback(null, user);
+      })
+      .catch(err => {
+        callback(err);
+      });
+    },
 }

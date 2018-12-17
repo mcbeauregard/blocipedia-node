@@ -1,5 +1,8 @@
 const Wiki = require("./models").Wiki;
 const Authorizer = require("../policies/application");
+const User = require("./models").User;
+const Collab = require("./models").Collaborators;
+const collabQueries = "./queries.collaborators.js";
 
 module.exports = {
 
@@ -23,14 +26,16 @@ module.exports = {
     },
 
     getWiki(id, callback){
-        return Wiki.findById(id)
-        .then((wiki) => {
-            callback(null, wiki);
+        return Wiki.find(
+          { where: {id: id}, include: {model:User} }
+        )
+        .then( wiki => {
+          callback(null, wiki);
         })
-        .catch((err) => {
-            callback(err);
+        .catch( err => {
+          callback(err);
         })
-    },
+      },
 
     deleteWiki(id, callback){
         return Wiki.destroy({
@@ -105,5 +110,36 @@ module.exports = {
                 console.log(err);
             })
         },
+        getStandardWikis(userId, callback) {
+            var result = {
+              wiki: null,
+              collab: null
+            };
+            return Wiki.findAll({
+              where: { private: false }
+            })
+            .then( wikis => {
+              result.wiki = wikis;
+              Wiki.findAll({
+                include: [{
+                  model: Collab, as: "collaborators", where: {userId}
+                }]
+              })
+              .then( wikis => {
+                result.collab = wikis;
+                var allWikis = result.wiki.concat(result.collab);
+                callback(null, allWikis);
+              })
+              .catch( err => {
+                console.log(err);
+                callback(err);
+              })
+            })
+            .catch( err => {
+              console.log(err);
+              callback(err);
+            })
+          },
+        
 }
 //

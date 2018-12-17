@@ -5,38 +5,57 @@
   </head>
   <body>
     <% include ../static/partials/navbar.ejs %>
-
     <main class="container">
-
       <h1>Edit Wiki</h1>
-
       <form action="/wikis/<%= wiki.id %>/update" method="post">
         <div class="form-group">
           <label for="title">Wiki Title</label>
-          <input value="<%= wiki.title %>" type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Title">
+          <input value="<%= wiki.title %>"
+                  type="text" class="form-control"
+                  name="title" aria-describedby="titleHelp"
+                  placeholder="Enter Title">
         </div>
         <div class="form-group">
           <label for="body">Body</label>
-          <textarea rows="4" class="form-control" name="body" placeholder="Enter Body"><%= wiki.body %></textarea>
+          <textarea id="text-input" rows="4" class="form-control"
+                    name="body" placeholder="body"><%- wiki.body %></textarea>
         </div>
 
-                 <!-- Make private/public button -->
-                 <% if( currentUser.isPremium() || currentUser.isAdmin() ) { %>
-                    <div class="form-group">
-                        <label for="private">Wiki status</label>
-                        <select class="form-control" name="private">
-                            <option value="false">Public wiki</option>
-                            <option value="true">Private wiki</option>
-                        </select>
-                    </div>
-                 <% } %>
-                <!-- Make private/public button -->
-        
+        <% if ( currentUser.role == "premium" && currentUser.id == wiki.User.id || currentUser.role == "admin" ) { %>
+          <% if (wiki.private) { %>
+            <input type="radio" value="false" name="private">Public</input>
+          <% } else { %>
+            <input type="radio" value="true" name="private">Private</input>
+          <% }%>
+        <% } %>
+
         <button type="submit" class="btn btn-primary">Update</button>
+        <small>You may use markdown syntax</small>
       </form>
+
+      <% if ( wiki.private == true && currentUser.role == "premium" && currentUser.id == wiki.User.id || currentUser.role == "admin" ) { %>
+      <form action="/wikis/<%= wiki.id %>/addCollab" method="post">
+        <label for="Collaborator Email">Add a Collaborator</label>
+        <input value="collaborator email"
+                type="text" class="form-control"
+                name="collabEmail" aria-describedby="collabEmailHelp"
+                placeholder="Enter Collaborator Email"
+                style="margin:10px;">
+        <button type="submit" class="btn btn-primary">Add Collaborator</button>
+      </form>
+      <form action="/wikis/<%= wiki.id %>/removeCollab" method="post">
+        <label for="CollaboratorEmail">Remove a Collaborator</label>
+        <input value="collaborator email"
+               type="text" class="form-control"
+               name="collabEmail" aria-describedby="collabEmailHelp"
+               placeholder="Enter Collaborator Email"
+               style="margin:10px;">
+        <button type="submit" class="btn btn-primary">Remove Collaborator</button>
+      </form>
+      <% } %>
+
+
     </main>
-
     <% include ../static/partials/baseScripts.ejs %>
-
   </body>
 </html>

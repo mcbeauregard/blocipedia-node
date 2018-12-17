@@ -1,3 +1,5 @@
+collabQueries = require("../db/queries.collaborators.js");
+
 module.exports = class ApplicationPolicy {
 
      constructor(user, record) {
@@ -21,6 +23,19 @@ module.exports = class ApplicationPolicy {
         return this.user && this.user.role == "standard";
      }
    
+     _isCollaborator() {
+      if (!user || !record) {
+        return false;
+      }
+      return collabQueries.isCollab(user.id, record.id, collab => {
+        if (!collab) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+    }
+     
      new() {
        return this.user != null;
      }
@@ -34,9 +49,15 @@ module.exports = class ApplicationPolicy {
      }
    
      edit() {
-      return this.new() &&
-      this.record && (this._isStandard() || this._isPremium() || this._isAdmin());
+      if (!this.record || !this.user) {
+        return false;
+      } else if (this.record.private) {
+        return this.record.userId == this.user.id;
+      } else {
+        return true; //it was a public record
       }
+    }
+  
    
      update() {
        return this.edit();
