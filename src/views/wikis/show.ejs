@@ -33,11 +33,13 @@
       <!-- show collaborators in a list -->
       <div>
         <h4>Collaborators on this wiki:</h4>
+        <ul>
         <% if(wiki.collaborators) { %>
           <% wiki.collaborators.forEach((collaborator) => { %>
-            <small><% include("../collaborators/show.ejs", {collaborator}) %></small>
+            <li><% include("../collaborators/show.ejs", {collaborator}) %></li>
             <% }) %>
           <% } %>
+        </ul>
       </div>
       <!-- end collaborators in a list -->
       </main>
