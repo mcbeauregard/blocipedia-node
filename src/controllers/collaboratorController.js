@@ -28,7 +28,7 @@ module.exports = {
     },
 
     show(req, res, next) {
-        wikiQueries.getWiki(req.params.id, (err, result) => {
+        wikiQueries.getWiki(req.params.id, (err, user) => {
           wiki = result['wiki'];
           collaborators = result["collaborators"];
     
@@ -36,7 +36,7 @@ module.exports = {
             res.redirect(404, '/');
           } else {
             wiki.body = markdown.toHTML(wiki.body);
-            res.render("collaborators/show", { wiki, collaborators });
+            res.render("collaborators/show", { wiki, user });
           }
         });
     }
