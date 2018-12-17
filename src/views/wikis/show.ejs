@@ -28,8 +28,15 @@
         </div>
       </form> 
 
-
-    </main>
+      <!-- show collaborators in a list -->
+      <h4>Collaborators on this wiki:</h4>
+      <% if(wiki.collaborators) { %>
+       <% wiki.collaborators.forEach((collaborator) => { %>
+          <small><% include("../collaborators/show.ejs", {collaborator}) %></small>
+          <% }) %>
+        <% } %>
+      <!-- end collaborators in a list -->
+      </main>
     <% include ../static/partials/baseScripts.ejs %>
   </body>
 </html>

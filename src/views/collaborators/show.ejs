@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <% include ../static/partials/head.ejs %>
-</head>
-
-<body>
-    <% include ../static/partials/navbar.ejs %>
-    <main class="container">
-        <% include ../static/partials/messages.ejs %>
-        
         <% if(collaborators) { %>
         <ul class="list-group">
             <% collaborators.forEach((collaborator) => {  %>
@@ -28,6 +17,3 @@
             <% }) %>
         </ul>
         <% } %>
-</body>
-
-</html>
