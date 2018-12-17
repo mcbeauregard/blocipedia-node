@@ -25,5 +25,20 @@ module.exports = {
             req.flash("notice", "You must be signed in to do that");
             res.redirect(req.headers.referer);
         }
+    },
+
+    show(req, res, next) {
+        wikiQueries.getWiki(req.params.id, (err, result) => {
+          wiki = result['wiki'];
+          collaborators = result["collaborators"];
+    
+          if (err || wiki == null) {
+            res.redirect(404, '/');
+          } else {
+            wiki.body = markdown.toHTML(wiki.body);
+            res.render("collaborators/show", { wiki, collaborators });
+          }
+        });
     }
+    
 }
