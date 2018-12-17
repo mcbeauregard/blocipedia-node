@@ -35,7 +35,7 @@
         <h4>Collaborators on this wiki:</h4>
         <ul>
         <% if(wiki.collaborators) { %>
-          <% wiki.collaborators.forEach((collaborator) => { %>
+          <% wiki.collaborators.forEach((collaborators) => { %>
             <li><% include("../collaborators/show.ejs", {collaborator}) %></li>
             <% }) %>
           <% } %>

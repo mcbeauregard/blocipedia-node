@@ -1,7 +1,6 @@
 
-        <% if(collaborators) { %>
+        <% if(collaborator) { %>
         <ul class="list-group">
-            <% collaborators.forEach((collaborator) => {  %>
             <li class="list-group-item">
                 <h4>
                     <%= collaborator.User.username %>
@@ -12,8 +11,10 @@
                     <button type="submit" class="btn btn-danger">Delete</button>
                     <input type="hidden" value="<%= collaborator.User.id %>" class="form-control" name="collaborator">
                 </form>
-                <% } %>
             </li>
             <% }) %>
         </ul>
         <% } %>
+</body>
+
+</html>
