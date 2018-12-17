@@ -20,4 +20,6 @@ router.get("/users/payment", userController.payment);
 router.get("/users/paymentFail", userController.paymentFail);
 router.get("/users/downgradeShow", userController.downgradeShow);
 
+router.get("/users/collaborations", userController.showCollaborations);
+
 module.exports = router;

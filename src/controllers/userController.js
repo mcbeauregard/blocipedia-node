@@ -125,6 +125,8 @@ module.exports = {
     paymentFail(req, res, next){
       res.render("users/paymentFail"); 
     },
+
+    
   }
 
   
