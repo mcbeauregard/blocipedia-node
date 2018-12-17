@@ -19,14 +19,14 @@
         <% } %>
     
     <!-- add collaborators button -->
-    <% if(wiki.private) { %>
-      <p><% include ../collaborators/add.ejs %></p>
-    <% } %>
+    <form style="width: 50%" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
+      <div class="input-group">
+          <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
+          <button type="submit" class="btn btn-primary">+ add collaborators</button>
+      </div>
+    </form>  
   
-   <!-- link to edit collaborator -->
-   <% if(wiki.private) { %>
-    <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-primary">+ Add collaborators</a>
-  <% } %>
+  
 
  <!-- show collaborators in a list -->
 
