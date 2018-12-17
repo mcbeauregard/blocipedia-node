@@ -32,7 +32,7 @@
       <!-- show collaborators in a list -->
       <div>
           <h4>Collaborators on this wiki:</h4>
-          <%= wiki.collaborators ? "wiki has collaborators" : "no collaborators found" %>          <ul>
+          `<%= wiki.collaborators ? wiki.collaborators.length : wiki.collaborators %>`<ul>
           <% if(wiki.collaborators) { %>
             <% wiki.collaborators.forEach((collaborators) => { %>
               <li><% include("../collaborators/show.ejs", {collaborator}) %></li>
@@ -41,6 +41,7 @@
           </ul>
         </div>
       <!-- end collaborators in a list -->
+      
 
       </main>
     <% include ../static/partials/baseScripts.ejs %>
