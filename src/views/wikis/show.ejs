@@ -20,7 +20,7 @@
     
     <!-- Make private/public button -->
     <% if(wiki.private) { %>
-      <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-primary">+ Add collaborators</a>
+      <p><% include ../collaborators/add.ejs %></p>
   <% } %>
 
   <hr>
