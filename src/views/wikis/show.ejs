@@ -17,18 +17,17 @@
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
         <% } %>
-    
-    <!-- add collaborators button -->
-    <form style="width: 50%" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
-      <div class="input-group">
-          <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
-          <button type="submit" class="btn btn-primary">+ add collaborators</button>
-      </div>
-    </form>  
-  
-  
 
- <!-- show collaborators in a list -->
+  <p><%- wiki.body %></p>
+      <hr>
+       <!-- add collaborators button -->
+       <form style="width: 50%" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
+        <div class="input-group">
+            <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
+            <button type="submit" class="btn btn-primary">+ add collaborators</button>
+        </div>
+      </form> 
+
 
     </main>
     <% include ../static/partials/baseScripts.ejs %>
