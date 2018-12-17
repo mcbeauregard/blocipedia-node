@@ -18,13 +18,17 @@
         </form>
         <% } %>
     
-    <!-- Make private/public button -->
+    <!-- add collaborators button -->
     <% if(wiki.private) { %>
       <p><% include ../collaborators/add.ejs %></p>
+    <% } %>
+  
+   <!-- link to edit collaborator -->
+   <% if(wiki.private) { %>
+    <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-primary">+ Add collaborators</a>
   <% } %>
 
-  <hr>
-  <p><%- wiki.body %></p>
+ <!-- show collaborators in a list -->
 
     </main>
     <% include ../static/partials/baseScripts.ejs %>
