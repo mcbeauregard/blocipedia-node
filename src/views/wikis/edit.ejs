@@ -32,9 +32,12 @@
                  <% } %>
                 <!-- Make private/public button -->
         
-        <button type="submit" class="btn btn-primary">Update</button>
-      </form>
-    </main>
+                <% if(currentUser && (currentUser.id == wiki.userId || currentUser && currentUser.isAdmin())) { %>
+                  <a href='/wikis/<%= wiki.id %>/collaborators' class="btn btn-primary">Edit Collaborators</a>
+                <% } %>
+              </form>
+            </main>
+        
 
     <% include ../static/partials/baseScripts.ejs %>
 

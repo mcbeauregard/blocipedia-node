@@ -1,6 +1,7 @@
 const User = require("./models").User;
 const Wiki = require("./models").Wiki;
 const bcrypt = require("bcryptjs");
+const Collaborator = require('./models').Collaborator;
 
 module.exports = {
   createUser(newUser, callback){
@@ -21,15 +22,27 @@ module.exports = {
     })
   },
 
-   getUser(id, callback){
-     return User.findById(id)
-     .then((user) => {
-      callback(null, user);
-      })
-         .catch((err) => {
-          callback(err);
-       })
-   },
+  getUser(id, callback) {
+    let result = {};
+    User.findById(id)
+        .then((user) => {
+            if (!user) {
+                callback(404);
+            } else {
+                result["user"] = user;
+                Collaborator.scope({
+                        method: ["userCollaborationsFor", id]
+                    }).all()
+                    .then((collaborations) => {
+                        result["collaborations"] = collaborations;
+                        callback(null, result);
+                    })
+                    .catch((err) => {
+                        callback(err);
+                    })
+            }
+        })
+},
 
    upgradeUserRole(req, callback){
     return User.findById(req.user.id)

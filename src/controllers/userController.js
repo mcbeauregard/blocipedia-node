@@ -125,6 +125,20 @@ module.exports = {
     paymentFail(req, res, next){
       res.render("users/paymentFail"); 
     },
+
+     //controller always called first
+  showCollaborations(req, res, next) {
+    userQueries.getUser(req.user.id, (err, result) => {
+      console.log(result);
+      let user = result['user'];
+      let collaborations = result['collaborations'];
+      if (err || user == null) {
+        res.redirect(404, '/');
+      } else {
+        res.render('users/collaborations', { user, collaborations });
+      }
+    });
+  }
   }
 
   

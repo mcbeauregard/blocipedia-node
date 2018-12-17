@@ -34,10 +34,14 @@ module.exports = class ApplicationPolicy {
      }
    
      edit() {
-      return this.new() &&
-      this.record && (this._isStandard() || this._isPremium() || this._isAdmin());
+      if(this.record.private == false) {
+        return this.new() &&
+        this.record && (this._isStandard() || this._isAdmin() || this._isPremium());
+      } else if (this.record.private == true) {
+        return this.new() &&
+        this.record && (this._isStandard() || this._isAdmin() || this._isPremium());
       }
-   
+    }
      update() {
        return this.edit();
      }
