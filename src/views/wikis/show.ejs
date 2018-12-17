@@ -18,6 +18,15 @@
         <% } %>
       <p><%- wiki.body %></p>
     
+      <h3>Collaborators</h3>
+      <% if(wiki.collaborators) { %>
+        <% wiki.collaborators.forEach((collaborator) => { %>
+          <%- include("../collaborators/show.ejs", {collaborator}) %>
+        
+        <% }) %>
+      <% } %>
+      <% include ../collaborators/show.ejs %>
+
     <!-- Make private/public button -->
     </main>
     <% include ../static/partials/baseScripts.ejs %>
