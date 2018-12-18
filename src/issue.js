@@ -1,13 +1,13 @@
 ReferenceError: /Users/michellebeauregard/Desktop/Sites/bloc/blocipedia-node/src/views/wikis/show.ejs:38
     36|           <% if(wiki.collaborators) { %>
     37|             <% wiki.collaborators.forEach((collaborators) => { %>
- >> 38|               <li><% include("../collaborators/show.ejs", {collaborator}) %></li>
+ >> 38|               <li><% include("../collaborator/show.ejs", {collaborator}) %></li>
     39|               <% }) %>
     40|             <% } %>
     41|           </ul>
 
 collaborator is not defined
-    at wiki.collaborators.forEach (eval at compile (/Users/michellebeauregard/Desktop/Sites/bloc/blocipedia-node/node_modules/ejs/lib/ejs.js:549:12), <anonymous>:124:46)
+    at wiki.collaborators.forEach (eval at compile (/Users/michellebeauregard/Desktop/Sites/bloc/blocipedia-node/node_modules/ejs/lib/ejs.js:549:12), <anonymous>:124:45)
     at Array.forEach (<anonymous>)
     at eval (eval at compile (/Users/michellebeauregard/Desktop/Sites/bloc/blocipedia-node/node_modules/ejs/lib/ejs.js:549:12), <anonymous>:121:27)
     at returnedFn (/Users/michellebeauregard/Desktop/Sites/bloc/blocipedia-node/node_modules/ejs/lib/ejs.js:580:17)
