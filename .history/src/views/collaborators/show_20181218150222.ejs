@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+      <h1>Collaborator show view</h1>
+
+      <% if(wiki.private == true)  { %>
+        <h2> Collaborators </h2>
+        <% if(collaborators) { %>
+          <p>
+          <ul class ="list-group">
+            <% collaborators.forEach((collaborator) => {  %>
+                <li class="list-group-item">
+                      <%= collaborator.User.name %>
+                      
+               </li>
+            <% }) %>
+          </ul>
+        </p>
+        <% } %>
+
+    <% include ../static/partials/baseScripts.ejs %>
+
+  </body>
+</html>
