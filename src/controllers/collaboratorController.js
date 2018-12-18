@@ -53,5 +53,17 @@ module.exports = {
 	            }
 	        }
 	      });
-	  },
+      },
+      
+      /*show(req, res, next){
+        wikiQueries.getWiki (req.params.id, (err, wiki) => { // we use re.params because the information we need is in the URL, i.e. the value 5 is stored in ID. We must use ID to define this route.
+          if(err || wiki == null){  // check error or wiki with no record
+            res.redirect(404, "/"); //  if err or null is found, return a not found status code, and then redirect to root page.
+          } else {
+           console.log(wiki);
+           wiki.body = markdown.toHTML(wiki.body);
+            res.render("wikis/show", {wiki}); // otherwise, return the SHOW partial view and pass the wiki record and render it.
+          }
+        });
+      },*/
 }
