@@ -30,16 +30,7 @@
       </form> 
 
       <!-- show collaborators in a list -->
-      <div>
-          <h4>Collaborators on this wiki:</h4>
-          <%= wiki.collaborators ? wiki.collaborators.length : wiki.collaborators %><ul>
-          <% if(wiki.collaborators) { %>
-            <% wiki.collaborators.forEach((collaborator) => { %>
-              <li><% include("../collaborators/show.ejs", {collaborator}) %></li>
-              <% }) %>
-            <% } %>
-          </ul>
-        </div>
+      
       <!-- end collaborators in a list -->
       
 
