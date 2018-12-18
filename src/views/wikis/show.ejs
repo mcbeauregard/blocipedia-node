@@ -29,8 +29,8 @@
       </div>
     </form> 
 
-      <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-primary">+ Add collaborators</a>
-    
+       <!--<a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-primary">+ Add collaborators</a>-->
+      <% include ../collaborators/show.ejs %>
     </main>
     <% include ../static/partials/baseScripts.ejs %>
   </body>
