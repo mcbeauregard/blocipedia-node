@@ -125,8 +125,8 @@ module.exports = {
     paymentFail(req, res, next){
       res.render("users/paymentFail"); 
     },
-
-    /*showCollaborations(req, res, next) {
+    
+    showCollaborations(req, res, next) {
       userQueries.getUser(req.user.id, (err, result) => {
         user = result["user"];
         collaborations = result["collaborations"];
@@ -136,7 +136,7 @@ module.exports = {
             res.render("users/collaborations", { user, collaborations });
           }
       });
-    }*/
+    }
   }
 
   

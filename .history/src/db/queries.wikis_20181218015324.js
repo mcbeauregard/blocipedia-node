@@ -13,7 +13,6 @@ module.exports = {
             callback(err);
         })
     },
-    
     addWiki(newWiki, callback){
         return Wiki.create(newWiki)
         .then((wiki) => {
@@ -33,6 +32,8 @@ module.exports = {
             callback(err);
         })
     },
+
+      }, 
 
     deleteWiki(id, callback){
         return Wiki.destroy({

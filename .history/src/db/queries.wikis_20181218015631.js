@@ -1,4 +1,5 @@
 const Wiki = require("./models").Wiki;
+const User = require("./models").User;
 const Authorizer = require("../policies/application");
 const Collaborator = require("./models").Collaborator;
 
@@ -13,7 +14,6 @@ module.exports = {
             callback(err);
         })
     },
-    
     addWiki(newWiki, callback){
         return Wiki.create(newWiki)
         .then((wiki) => {
@@ -34,6 +34,7 @@ module.exports = {
         })
     },
 
+      
     deleteWiki(id, callback){
         return Wiki.destroy({
             where: { id }

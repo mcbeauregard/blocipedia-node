@@ -13,7 +13,7 @@ module.exports = {
             callback(err);
         })
     },
-    
+
     addWiki(newWiki, callback){
         return Wiki.create(newWiki)
         .then((wiki) => {
@@ -25,6 +25,7 @@ module.exports = {
     },
 
     getWiki(id, callback){
+        console.log(wiki);
         return Wiki.findById(id)
         .then((wiki) => {
             callback(null, wiki);
