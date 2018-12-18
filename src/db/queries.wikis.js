@@ -24,25 +24,24 @@ module.exports = {
         })
     },
 
-      getWiki(id, callback){ 
+    getWiki(id, callback){ 
         return Wiki.findById(id,{ include: [ {model: Collaborator, as: "collaborators", include: [ {model: User} ]}, ]}) 
         .then((wiki) => {
-          Collaborator.scope({method: ["collaboratorsFor", wiki.id]}).all()
+            Collaborator.scope({method: ["collaboratorsFor", wiki.id]}).all()
             .then((collaborators) => {
-              wiki.collaborators = collaborators;
-              callback(null, wiki);
+                wiki.collaborators = collaborators;
+                callback(null, wiki);
             }).catch((err) => {
-              console.log("Error finding collaborators for wiki");
-              console.log(err);
-              callback(err);
+                console.log("Error finding collaborators for wiki");
+                console.log(err);
+                callback(err);
             });
         }) 
         .catch((err) => { 
-          console.log("Error finding wiki");
-          callback(err); 
+            console.log("Error finding wiki");
+            callback(err); 
         }) 
-      }, 
-
+        }, 
 
     deleteWiki(id, callback){
         return Wiki.destroy({
