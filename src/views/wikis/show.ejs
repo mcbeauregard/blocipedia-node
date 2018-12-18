@@ -18,7 +18,8 @@
         <% } %>
       <p><%- wiki.body %></p>
     
-    <!-- Make private/public button -->
+    <!-- Add Collaborator button -->
+
 
     <a href="/wikis/<%= wiki.id %>/collaborators/show" class="btn btn-success">+ Add collaborator</a>
     
@@ -30,7 +31,10 @@
     </form> 
 
        <!--<a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-primary">+ Add collaborators</a>-->
-      <% include ../collaborators/show.ejs %>
+      
+       <!-- Show wiki collaborators -->
+
+       <% include ../collaborators/show.ejs %>
     </main>
     <% include ../static/partials/baseScripts.ejs %>
   </body>
