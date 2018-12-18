@@ -7,22 +7,29 @@
     <% include ../static/partials/navbar.ejs %>
 
     <main class="container">
-        <% include ../static/partials/messages.ejs %>
+
+      <% include ../static/partials/messages.ejs %>
+
       <h1><%= wiki.title %></h1>
-      
+
+      <p><%- wiki.body %></p>
+
       <% if(currentUser) { %>
         <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>
         <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
-            <button type="submit" class="btn btn-danger">Delete</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
         </form>
-        <% } %>
-      <p><%- wiki.body %></p>
-    
-    <!-- Make private/public button -->
+      <% } %>
 
-    <a href="/wikis/<%= wiki.id %>/collaborators/show" class="btn btn-success">New Collaborator</a>
-        <button href="`${base}/${this.wiki.id}/collaborations/show`"></button>
+      <% if(wiki.private) { %>
+        <a href="/wikis/<%= wiki.id %>/collaborators2/show" class="btn btn-info">Edit Collaborators</a>
+      <% } %>
+
+      <a href="/wikis" class="btn btn-info">Back to Wikis</a>
+
     </main>
+
     <% include ../static/partials/baseScripts.ejs %>
+
   </body>
 </html>

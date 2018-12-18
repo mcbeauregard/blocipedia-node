@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+        <% include ../static/partials/messages.ejs %>
+      <h1><%= wiki.title %></h1>
+      
+    <!-- Make private/public button -->
+      <% if(currentUser) { %>
+        <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>
+        <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        <% } %>
+
+  <p><%- wiki.body %></p>
+      <hr>
+       <!-- add collaborators button -->
+       
+       <form style="width: 400px" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
+        <div class="input-group">
+           <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
+           <button type="submit" class="btn btn-primary">+ add collaborators</button>
+        </div>
+      </form> 
+ 
+      <% if(wiki.private) { %>
+        <a href="/wikis/<%= wiki.id %>/collabs" class="btn btn-primary">+ Add collaborators</a>
+    <% } %>
+
+    <ul class="list-group">
+      <% topic.posts.forEach((post) => { %>
+        <li class="list-group-item">
+          <a href="/wikis/<%= wiki.id %>/collaborators/<%= post.id %>">
+          </a> link test </a>
+        </li>
+      <% }) %>
+    </ul>
+ 
+      
+
+      </main>
+    <% include ../static/partials/baseScripts.ejs %>
+  </body>
+</html>

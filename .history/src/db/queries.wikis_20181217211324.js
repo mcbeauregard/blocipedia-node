@@ -1,6 +1,5 @@
 const Wiki = require("./models").Wiki;
 const Authorizer = require("../policies/application");
-const Collaborator = require("./models").Collaborator;
 
 module.exports = {
 
@@ -24,12 +23,7 @@ module.exports = {
     },
 
     getWiki(id, callback){
-        return Wiki.findById(id, {
-                  include: [{
-                    model: Collaborator,
-                    as: "collaborators"
-                  }]
-                })
+        return Wiki.findById(id)
         .then((wiki) => {
             callback(null, wiki);
         })

@@ -1,42 +1,57 @@
 const Wiki = require("./models").Wiki;
 const Authorizer = require("../policies/application");
-const Collaborator = require("./models").Collaborator;
 
 module.exports = {
 
-    getAllWikis(callback){
+    getAllWikis(userId, callback){
+        let result = {};
         return Wiki.all()
         .then((wikis) => {
-            callback(null, wikis);
-        })
-        .catch((err) => {
-            callback(err);
-        })
-    },
-    addWiki(newWiki, callback){
-        return Wiki.create(newWiki)
-        .then((wiki) => {
-          callback(null, wiki);
+          result["wikis"] = wikis;
+          if (userId == null) {
+            result["collaborations"] = [];
+            callback(null, result);
+          }
+          else {
+            Collaborator.scope({ method: ["userCollaborationsFor", userId] }).all()
+              .then((collaborations) => {
+                result["collaborations"] = collaborations;
+                callback(null, result);
+              })
+          }
         })
         .catch((err) => {
           callback(err);
         })
-    },
-
-    getWiki(id, callback){
-        return Wiki.findById(id, {
-                  include: [{
-                    model: Collaborator,
-                    as: "collaborators"
-                  }]
+      },
+      addWiki(newWiki, callback){
+         return Wiki.create(newWiki)
+         .then((wiki) => {
+           callback(null, wiki);
+         })
+         .catch((err) => {
+           callback(err);
+         })
+       },
+       getWiki(id, callback) {
+        let result = {};
+        return Wiki.findById(id)
+          .then((wiki) => {
+            if (!wiki) {
+              callback(404);
+            } else {
+              result["wiki"] = wiki;
+              Collaborator.scope({ method: ["collaboratorsFor", id] }).all()
+                .then((collaborations) => {
+                  result["collaborations"] = collaborations;
+                  callback(null, result);
                 })
-        .then((wiki) => {
-            callback(null, wiki);
-        })
-        .catch((err) => {
+            }
+          })
+          .catch((err) => {
             callback(err);
-        })
-    },
+          })
+       },
 
     deleteWiki(id, callback){
         return Wiki.destroy({

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+        <% include ../static/partials/messages.ejs %>
+      <h1><%= wiki.title %></h1>
+      
+    <!-- Make private/public button -->
+      <% if(currentUser) { %>
+        <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>
+        <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        <% } %>
+
+  <p><%- wiki.body %></p>
+      <hr>
+       <!-- add collaborators button -->
+       
+       <form style="width: 400px" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
+        <div class="input-group">
+           <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
+           <button type="submit" class="btn btn-primary">+ add collaborators</button>
+        </div>
+      </form> 
+
+           <!-- show collaborators in a list -->
+           <ul class="list-group">
+              <% collaborators.forEach((collaborator) => {  %>
+              <li class="list-group-item">
+                  <h4>
+                      <%= collaborator.User.username %>
+                  </h4>
+                  <% if(currentUser && (currentUser.role === "premium" || currentUser.role === "admin")) { %>
+                  <form action="/wikis/<%= collaborator.wikiId %>/collaborators/delete" method="post">
+                      <input type="hidden" value="<%= collaborator.User.id %>" class="form-control" name="collaborator">
+                  </form>
+                  <% } %>
+              </li>
+              <% }) %>
+          </ul>
+          <% } %>
+
+            <!-- end collaborators in a list -->
+      
+
+      </main>
+    <% include ../static/partials/baseScripts.ejs %>
+  </body>
+</html>

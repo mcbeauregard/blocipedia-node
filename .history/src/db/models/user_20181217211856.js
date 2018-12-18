@@ -23,17 +23,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   User.associate = function(models) {
-
+    // associations can be defined here
     User.hasMany(models.Wiki, {
       foreignKey: "userId",
       as: "wikis"
     });
-
     User.hasMany(models.Collaborator, {
-      foreignKey: "userId",
-      as: "collaborators"
+      foreignKey: 'userId',
+      as: 'collaborators'
     });
-
+  };
     User.prototype.isStandard = function() {
       return this.role === "standard";
     };
@@ -45,6 +44,6 @@ module.exports = (sequelize, DataTypes) => {
     User.prototype.isAdmin = function() {
       return this.role === "admin";
     };
-  };
+  
   return User;
 };

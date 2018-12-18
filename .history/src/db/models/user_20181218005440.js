@@ -23,15 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   User.associate = function(models) {
-
+    // associations can be defined here
     User.hasMany(models.Wiki, {
-      foreignKey: "userId",
+      foreignKey: "wikiId",
       as: "wikis"
-    });
-
-    User.hasMany(models.Collaborator, {
-      foreignKey: "userId",
-      as: "collaborators"
     });
 
     User.prototype.isStandard = function() {

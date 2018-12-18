@@ -1,0 +1,12 @@
+<p><%= collaborator.userId %></p>
+<hr>
+
+<h1>Collaborators</h1>
+
+<ul class="list-group">
+  <% wiki.collaborator.forEach((collaborator) => { %>
+    <li class="list-group-item">
+      <a href="/wikis/<%= wiki.id %>/collaborator/<%= collaborator.id %>"> <%= collaborator.username %> </a>
+    </li>
+  <% }) %>
+</ul>

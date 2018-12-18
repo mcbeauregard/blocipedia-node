@@ -1,6 +1,5 @@
 const Wiki = require("./models").Wiki;
 const Authorizer = require("../policies/application");
-const Collaborator = require("./models").Collaborator;
 
 module.exports = {
 
