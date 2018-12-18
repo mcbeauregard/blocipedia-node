@@ -20,15 +20,9 @@
     
     <!-- Make private/public button -->
 
-    <a href="/wikis/<%= wiki.id %>/collaborators/show" class="btn btn-success">+ Add collaborator</a>
+    <a href="`${base}/${this.wiki.id}/collaborators/`" class="btn btn-success">+ Add collaborator</a>
+        <button href="`${base}/${this.wiki.id}/collaborators/show`"></button>
     </main>
-
-    <form style="width: 400px" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
-      <div class="input-group">
-         <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
-         <button type="submit" class="btn btn-primary">+ add collaborators</button>
-      </div>
-    </form> 
     <% include ../static/partials/baseScripts.ejs %>
   </body>
 </html>
