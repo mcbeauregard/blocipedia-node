@@ -21,7 +21,7 @@ module.exports = {
     })
   },
 
-  getUser(id, callback) { // error fixed
+  getUser(id, callback) { // error
     let result = {};
     User.findById(id)
         .then((user) => {

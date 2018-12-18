@@ -61,7 +61,7 @@ module.exports = {
     });
   },*/
 
-  /*show(req, res, next){
+  show(req, res, next){
   wikiQueries.getWiki (req.params.id, (err, result) => { 
     wiki = result['wiki'];
     wiki.collaborators = result["collaborators"]
@@ -74,9 +74,9 @@ module.exports = {
       res.render("wikis/show", {wiki}); 
     }
   });
-},*/
+},
 
-  show(req, res, next){
+  /*show(req, res, next){
     wikiQueries.getWiki(req.params.id, (err, result) => { // error
       wiki = result["wiki"];
       collaborators = result["collaborators"];
@@ -95,7 +95,7 @@ module.exports = {
             }
         }
     });
-},
+},*/
 
 destroy(req, res, next){
  wikiQueries.deleteWiki(req.params.id, (err, wiki) => {

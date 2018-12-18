@@ -77,7 +77,7 @@ module.exports = {
 },*/
 
   show(req, res, next){
-    wikiQueries.getWiki(req.params.id, (err, result) => { // error
+    wikiQueries.getWiki(req.params.id, (err, result) => {
       wiki = result["wiki"];
       collaborators = result["collaborators"];
 
@@ -126,7 +126,7 @@ edit(req, res, next){
    });
 },
 
-/* edit(req, res, next){
+edit(req, res, next){
   wikiQueries.getWiki(req.params.id, (err, result) => {
     wiki = result["wiki"];
     collaborators = result["collaborators"];
@@ -145,7 +145,6 @@ edit(req, res, next){
         }
      });
   },
-  */
 
  update(req, res, next) {
   wikiQueries.updateWiki(req, req.body, (err, wiki) => {

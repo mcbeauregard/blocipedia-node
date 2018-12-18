@@ -24,18 +24,8 @@ module.exports = {
         })
     },
 
-    getWiki(id, callback){
+    /*getWiki(id, callback){
         return Wiki.findById(id)
-        .then((wiki) => {
-            callback(null, wiki);
-        })
-        .catch((err) => {
-            callback(err);
-        })
-    }, 
-
-   /* getWiki(id, callback){ // error
-        return Wiki.findById(id,{ include: [ {model: Collaborator, as: "collaborators", include: [ {model: User} ]}, ]})
         .then((wiki) => {
             callback(null, wiki);
         })
@@ -44,28 +34,15 @@ module.exports = {
         })
     },*/
 
-    /*
-    //error
-    getWiki(id, callback){ 
-        return Wiki.findById(id,{ include: [ {model: Collaborator, as: "collaborators", include: [ {model: User} ]}, ]}) // error
+    getWiki(id, callback){
+        return Wiki.findById(id,{ include: [ {model: Collaborator, as: "collaborators", include: [ {model: User} ]}, ]})
         .then((wiki) => {
-          Collaborator.scope({method: ["collaboratorsFor", wiki.id]}).all()
-            .then((collaborators) => {
-              wiki.collaborators = collaborators;
-              callback(null, wiki);
-            }).catch((err) => {
-              console.log("Error finding collaborators for wiki");
-              console.log(err);
-              callback(err);
-            });
-        }) 
-        .catch((err) => { 
-          console.log("Error finding wiki");
-          callback(err); 
-        }) 
-    }, 
-    */
-      
+            callback(null, wiki);
+        })
+        .catch((err) => {
+            callback(err);
+        })
+    },
 
     deleteWiki(id, callback){
         return Wiki.destroy({
@@ -78,6 +55,8 @@ module.exports = {
             callback(err);
         })
     },
+    
+///
 
     updateWiki(req, updatedWiki, callback) {
         return Wiki.findById(req.params.id)

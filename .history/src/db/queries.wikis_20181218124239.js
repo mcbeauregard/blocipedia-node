@@ -32,7 +32,7 @@ module.exports = {
         .catch((err) => {
             callback(err);
         })
-    }, 
+    },
 
    /* getWiki(id, callback){ // error
         return Wiki.findById(id,{ include: [ {model: Collaborator, as: "collaborators", include: [ {model: User} ]}, ]})
@@ -44,10 +44,8 @@ module.exports = {
         })
     },*/
 
-    /*
-    //error
-    getWiki(id, callback){ 
-        return Wiki.findById(id,{ include: [ {model: Collaborator, as: "collaborators", include: [ {model: User} ]}, ]}) // error
+    /*getWiki(id, callback){ 
+        return Wiki.findById(id,{ include: [ {model: Collaborator, as: "collaborators", include: [ {model: User} ]}, ]}) 
         .then((wiki) => {
           Collaborator.scope({method: ["collaboratorsFor", wiki.id]}).all()
             .then((collaborators) => {
@@ -63,8 +61,7 @@ module.exports = {
           console.log("Error finding wiki");
           callback(err); 
         }) 
-    }, 
-    */
+    }, */
       
 
     deleteWiki(id, callback){

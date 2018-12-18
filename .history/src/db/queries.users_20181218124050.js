@@ -21,7 +21,7 @@ module.exports = {
     })
   },
 
-  getUser(id, callback) { // error fixed
+  /*getUser(id, callback) {
     let result = {};
     User.findById(id)
         .then((user) => {
@@ -41,7 +41,7 @@ module.exports = {
                     })
             }
         })
-},
+},*/
 
    upgradeUserRole(req, callback){
     return User.findById(req.user.id)

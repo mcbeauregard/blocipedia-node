@@ -50,34 +50,19 @@ module.exports = {
       },
 
    /*show(req, res, next){
-    wikiQueries.getWiki (req.params.id, (err, wiki) => { 
-      if(err || wiki == null){ 
-        res.redirect(404, "/"); 
+    wikiQueries.getWiki (req.params.id, (err, wiki) => { // we use re.params because the information we need is in the URL, i.e. the value 5 is stored in ID. We must use ID to define this route.
+      if(err || wiki == null){  // check error or wiki with no record
+        res.redirect(404, "/"); //  if err or null is found, return a not found status code, and then redirect to root page.
       } else {
        console.log(wiki);
        wiki.body = markdown.toHTML(wiki.body);
-        res.render("wikis/show", {wiki}); 
+        res.render("wikis/show", {wiki}); // otherwise, return the SHOW partial view and pass the wiki record and render it.
       }
     });
   },*/
 
-  /*show(req, res, next){
-  wikiQueries.getWiki (req.params.id, (err, result) => { 
-    wiki = result['wiki'];
-    wiki.collaborators = result["collaborators"]
-
-    if(err || wiki == null){  
-      res.redirect(404, "/"); 
-    } else {
-     console.log(wiki);
-     wiki.body = markdown.toHTML(wiki.body);
-      res.render("wikis/show", {wiki}); 
-    }
-  });
-},*/
-
   show(req, res, next){
-    wikiQueries.getWiki(req.params.id, (err, result) => { // error
+    wikiQueries.getWiki(req.params.id, (err, result) => {
       wiki = result["wiki"];
       collaborators = result["collaborators"];
 
@@ -96,6 +81,21 @@ module.exports = {
         }
     });
 },
+
+/*show(req, res, next){
+  wikiQueries.getWiki (req.params.id, (err, result) => { // we use re.params because the information we need is in the URL, i.e. the value 5 is stored in ID. We must use ID to define this route.
+    wiki = result['wiki'];
+    wiki.collaborators = result["collaborators"]
+
+    if(err || wiki == null){  // check error or wiki with no record
+      res.redirect(404, "/"); //  if err or null is found, return a not found status code, and then redirect to root page.
+    } else {
+     console.log(wiki);
+     wiki.body = markdown.toHTML(wiki.body);
+      res.render("wikis/show", {wiki}); // otherwise, return the SHOW partial view and pass the wiki record and render it.
+    }
+  });
+},*/
 
 destroy(req, res, next){
  wikiQueries.deleteWiki(req.params.id, (err, wiki) => {
@@ -125,27 +125,6 @@ edit(req, res, next){
     }
    });
 },
-
-/* edit(req, res, next){
-  wikiQueries.getWiki(req.params.id, (err, result) => {
-    wiki = result["wiki"];
-    collaborators = result["collaborators"];
-      if(err || wiki == null){
-          res.redirect(404, "/");
-      } else {
-        
-      const authorized = new Authorizer(req.user, wiki, collaborators).edit();
-      
-      if(authorized){
-          res.render("wikis/edit", {wiki, collaborators});
-      } else {
-      req.flash("notice", "You are not authorized to do that.");
-          res.redirect(`/wikis/${req.params.id}`);
-      }
-        }
-     });
-  },
-  */
 
  update(req, res, next) {
   wikiQueries.updateWiki(req, req.body, (err, wiki) => {
