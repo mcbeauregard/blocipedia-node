@@ -135,7 +135,7 @@ show(req, res, next) {
 
 X ROUTE
 https://github.com/mcbeauregard/blocipedia-node/blob/wiki-collaborator-six/src/routes/collaborators.js 
-router.get(“/wikis/:wikiId/collaborators", collaboratorController.show);
+router.get("/wikis/:wikiId/collaborators", collaboratorController.show);
 
 VIEW
 https://github.com/mcbeauregard/blocipedia-node/blob/wiki-collaborator-six/src/views/collaborators/show.ejs 
