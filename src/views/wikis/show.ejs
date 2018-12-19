@@ -32,9 +32,20 @@
 
        <!--<a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-primary">+ Add collaborators</a>-->
       
-       <!-- Show wiki collaborators -->
-
-       <% include ../collaborators/show.ejs %>
+      <!-- show collaborators in a list -->
+      <div>
+          <h4>Collaborators on this wiki:</h4>
+          <%= wiki.collaborators ? wiki.collaborators.length : wiki.collaborators %>
+          <ul>
+          <% if(wiki.collaborators) { %>
+            <% wiki.collaborators.forEach((collaborators) => { %>
+              <li><% include("../collaborators/show.ejs", {collaborator}) %></li>
+              <% }) %>
+            <% } %>
+          </ul>
+        </div>
+        <!-- end collaborators in a list -->
+      <!--  <% include ../collaborators/show.ejs %> -->
     </main>
     <% include ../static/partials/baseScripts.ejs %>
   </body>
