@@ -49,7 +49,7 @@ module.exports = {
         }
       },
 
-   show(req, res, next){
+    show(req, res, next){ //works?
     wikiQueries.getWiki (req.params.id, (err, wiki) => { 
       if(err || wiki == null){ 
         res.redirect(404, "/"); 
@@ -61,7 +61,7 @@ module.exports = {
     });
   },
 
-  /*show(req, res, next){
+ /*show(req, res, next){
   wikiQueries.getWiki (req.params.id, (err, result) => { 
     wiki = result['wiki'];
     wiki.collaborators = result["collaborators"]
@@ -74,7 +74,7 @@ module.exports = {
       res.render("wikis/show", {wiki}); 
     }
   });
-},*/
+}, 
 
   /*show(req, res, next){
     wikiQueries.getWiki(req.params.id, (err, result) => { // error
