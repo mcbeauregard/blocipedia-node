@@ -19,6 +19,8 @@
           <label for="body">Body</label>
           <textarea rows="4" class="form-control" name="body" placeholder="Enter Body"><%= wiki.body %></textarea>
         </div>
+            <% include ../static/partials/baseScripts.ejs %>
+
 
                  <!-- Make private/public button -->
                  <% if( currentUser.isPremium() || currentUser.isAdmin() ) { %>
@@ -31,7 +33,10 @@
                     </div>
                  <% } %>
                 <!-- Make private/public button -->
-        
+                    
+                <!-- Collaborator add and delete button -->
+                <p><% include ../collaborators/show.ejs %></p>
+                 
                 
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
