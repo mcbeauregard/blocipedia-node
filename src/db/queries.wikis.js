@@ -1,6 +1,7 @@
 const Wiki = require("./models").Wiki;
 const Authorizer = require("../policies/application");
 const Collaborator = require("./models").Collaborator;
+const User = require("./models").User;
 
 module.exports = {
 
@@ -24,7 +25,7 @@ module.exports = {
         })
     },
 
-    getWiki(id, callback){
+    /*getWiki(id, callback){
         return Wiki.findById(id)
         .then((wiki) => {
             callback(null, wiki);
@@ -32,7 +33,7 @@ module.exports = {
         .catch((err) => {
             callback(err);
         })
-    }, 
+    }, */
 
    /* getWiki(id, callback){ // error
         return Wiki.findById(id,{ include: [ {model: Collaborator, as: "collaborators", include: [ {model: User} ]}, ]})
@@ -44,7 +45,7 @@ module.exports = {
         })
     },*/
 
-    /*
+    
     //error
     getWiki(id, callback){ 
         return Wiki.findById(id,{ include: [ {model: Collaborator, as: "collaborators", include: [ {model: User} ]}, ]}) // error
@@ -64,7 +65,7 @@ module.exports = {
           callback(err); 
         }) 
     }, 
-    */
+    
       
 
     deleteWiki(id, callback){
