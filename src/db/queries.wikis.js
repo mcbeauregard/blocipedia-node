@@ -25,28 +25,6 @@ module.exports = {
         })
     },
 
-    /*getWiki(id, callback){
-        return Wiki.findById(id)
-        .then((wiki) => {
-            callback(null, wiki);
-        })
-        .catch((err) => {
-            callback(err);
-        })
-    }, */
-
-   /* getWiki(id, callback){ // error
-        return Wiki.findById(id,{ include: [ {model: Collaborator, as: "collaborators", include: [ {model: User} ]}, ]})
-        .then((wiki) => {
-            callback(null, wiki);
-        })
-        .catch((err) => {
-            callback(err);
-        })
-    },*/
-
-    
-    //error
     getWiki(id, callback){ 
         return Wiki.findById(id,{ include: [ {model: Collaborator, as: "collaborators", include: [ {model: User} ]}, ]}) // error
         .then((wiki) => {
@@ -65,8 +43,6 @@ module.exports = {
           callback(err); 
         }) 
     }, 
-    
-      
 
     deleteWiki(id, callback){
         return Wiki.destroy({
@@ -140,4 +116,3 @@ module.exports = {
             })
         },
 }
-//
