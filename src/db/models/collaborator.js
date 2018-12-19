@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         ]
       }
     });
-    Collaborator.addScope("userCollaborationsFor", (userId) => {
+    Collaborator.addScope("collaborationsFor", (userId) => {
       return {
         include: [{
           model: models.Wiki

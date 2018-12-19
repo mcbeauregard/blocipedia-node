@@ -31,7 +31,7 @@ module.exports = {
             } else {
                 result["user"] = user;
                 Collaborator.scope({
-                        method: ["userCollaborationsFor", id]
+                        method: ["collaborationsFor", id]
                     }).all()
                     .then((collaborations) => {
                         result["collaborations"] = collaborations;
