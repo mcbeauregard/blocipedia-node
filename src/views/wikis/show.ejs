@@ -21,7 +21,6 @@
     <!-- Add Collaborator button -->
 
 
-    <a href="/wikis/<%= wiki.id %>/collaborators/show" class="btn btn-success">+ Add collaborator</a>
     
     <form style="width: 400px" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
       <div class="input-group">
@@ -38,7 +37,7 @@
           <%= wiki.collaborators ? wiki.collaborators.length : wiki.collaborators %>
           <ul>
           <% if(wiki.collaborators) { %>
-            <% wiki.collaborators.forEach((collaborators) => { %>
+            <% wiki.collaborators.forEach((collaborator) => { %>
               <li><% include("../collaborators/show.ejs", {collaborator}) %></li>
               <% }) %>
             <% } %>
@@ -46,6 +45,7 @@
         </div>
         <!-- end collaborators in a list -->
      
+         
     </main>
     <% include ../static/partials/baseScripts.ejs %>
   </body>
