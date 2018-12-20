@@ -41,16 +41,17 @@
             <li class="list-group-item">
                 <p><%= collaborator.User.username %></p>
                 <% if(currentUser && (currentUser.role === "premium" || currentUser.role === "admin")) { %>
-                <form style="width:25%" action="/wikis/<%= collaborator.wikiId %>/collaborators/delete" method="post">
+                  <form style="width:25%" action="/wikis/<%= collaborator.wikiId %>/collaborators/delete" method="post">
                     <button type="submit" class="btn btn-danger">Delete</button>
                     <input type="hidden" value="<%= collaborator.User.id %>" class="form-control" name="collaborator">
-                </form>
+                  </form>
                 <% } %>
             </li>
             <% }) %>
         </ul>
         <% } %> 
-        <!-- end collaborators in a list -->
+
+  <!-- end collaborators in a list -->
 
           
     </main>

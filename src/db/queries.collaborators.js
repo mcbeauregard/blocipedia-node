@@ -11,8 +11,8 @@ module.exports = {
                 username: req.body.collaborator
             }
         })
-            .then((user) => {
-                if (!user) {
+            .then((collaborator) => {
+                if (!collaborator) {
                     return callback("User does not exist")
                 }
                 Collaborator.findOne({

@@ -57,7 +57,7 @@ module.exports = class ApplicationPolicy {
     }
 
     removeCollaborator() {
-      return this._isAdmin() || this._isOwner();
+     return this._isAdmin() || this._isOwner();
     }
    }
    
