@@ -41,17 +41,14 @@ module.exports = {
     },
 
     deleteCollaborator(req, callback) {
+        let id = req.params.id;
         let wikiId = req.params.wikiId;
-        let userId = req.params.id;
-
-        //console.dir(wiki)
-        const authorized = new Authorizer(req.user, wikiId, userId).destroy();
+        const authorized = new Authorizer(req.user, wikiId, req.user.id).destroy();
        
         if (authorized) {
             Collaborator.destroy({
                 where: {
-                    userId: userId,
-                    wikiId: wikiId
+                    id: id
                 }
             })
                 .then((deletedRecordsCount) => {
