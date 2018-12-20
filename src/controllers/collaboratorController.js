@@ -22,16 +22,18 @@ module.exports = {
         });
     },*/
 
-    
-    delete(req, res, next){
-        collaboratorQueries.deleteCollaborator(req.params.id, (err, deletedRecordsCount) => {
-          if(err){
-            res.redirect(500, `/wikis/${req.params.wikiId}/collaborators/${req.params.collabId}`)
-          } else {
-            res.redirect(303, `/wikis/${req.params.wikiId}`)
-          }
-        });
+    delete(id, callback){
+        return Post. collaboratorQueries.deleteCollaborator({
+          where: { collabId }
+        })
+        .then((deletedRecordsCount) => {
+          callback(null, deletedRecordsCount);
+        })
+        .catch((err) => {
+          callback(err);
+        })
       },
+   
 
     show(req, res, next) {
         wikiQueries.getWiki(req.params.wikiId, (err, result) => {
