@@ -11,8 +11,8 @@ module.exports = {
                 username: req.body.collaborator
             }
         })
-            .then((collaborator) => {
-                if (!collaborator) {
+            .then((user) => {
+                if (!user) {
                     return callback("User does not exist")
                 }
                 Collaborator.findOne({
@@ -41,36 +41,28 @@ module.exports = {
     },
 
     deleteCollaborator(req, callback) {
-        let collabId = req.body.collaborator;
+        let userId = req.body.collaborator;
         let wikiId = req.params.wikiId;
-        console.dir(req.body);
 
-        User.findOne({
-            where: {
-                id: collabId
-            }
-        })
-            .then((collaborator) => {
-                console.dir(collaborator);
-                const authorized = new Authorizer(req.user, wikiId, collaborator).removeCollaborator();
+        const authorized = new Authorizer(req.user, wiki, userId).destroy();
 
-                if (authorized) {
-                    Collaborator.destroy({
-                        where: {
-                            userId: collaborator.id,
-                            wikiId: wikiId
-                        }
-                    })
-                        .then((deletedRecordsCount) => {
-                            callback(null, deletedRecordsCount);
-                        })
-                        .catch((err) => {
-                            callback(err);
-                        });
-                } else {
-                    req.flash("notice", "You are not authorized to do that.");
-                    callback(401);
+        if (authorized) {
+            Collaborator.destroy({
+                where: {
+                    userId: userId,
+                    wikiId: wikiId
                 }
             })
+                .then((deletedRecordsCount) => {
+                    callback(null, deletedRecordsCount);
+                })
+                .catch((err) => {
+                    callback(err);
+                });
+        } else {
+            req.flash("notice", "You are not authorized to do that.")
+            callback(401);
+        }
     }
-}       
+
+}
