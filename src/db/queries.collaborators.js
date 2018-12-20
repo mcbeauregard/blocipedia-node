@@ -42,10 +42,10 @@ module.exports = {
 
     deleteCollaborator(req, callback) {
         let userId = req.body.collaborator;
-        let wikiId = req.params.wikiId;
-
-        const authorized = new Authorizer(req.user, wiki, userId).destroy();
-
+        let wikiId = req.params.wiki;
+        console.dir(wiki)
+        const authorized = new Authorizer(req.user, wikiId, userId).destroy();
+       
         if (authorized) {
             Collaborator.destroy({
                 where: {
