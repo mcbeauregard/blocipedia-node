@@ -20,7 +20,7 @@
           <!-- END user account info -->
 
           <!-- upgrade user from standard to premium -->
-          <% if(currentUser && currentUser.isStandard()) { %>
+          <% if(currentUser && (currentUser.role === "standard" || currentUser.role === "admin")) { %>
             <h4>Basic</h4>
             <header class="jumbotron my-3">
                 <h2>Change plan</h2>
@@ -39,7 +39,7 @@
             </header>
 
             <!-- downgrade user from premium to standard -->
-            <% } else if(currentUser && currentUser.isPremium()) { %>
+            <% } else if(currentUser && (currentUser.role === "premium" || currentUser.role === "admin")) { %>
                 <h4>Premium</h4>
                 <header class="jumbotron my-3">
                     <h2>Change plan</h2>

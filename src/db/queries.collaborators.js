@@ -41,28 +41,36 @@ module.exports = {
     },
 
     deleteCollaborator(req, callback) {
-        let userId = req.body.collaborator;
+        let collabId = req.body.collaborator;
         let wikiId = req.params.wikiId;
+        console.dir(req.body);
 
-        const authorized = new Authorizer(req.user, wiki, userId).destroy();
+        User.findOne({
+            where: {
+                id: collabId
+            }
+        })
+            .then((collaborator) => {
+                console.dir(collaborator);
+                const authorized = new Authorizer(req.user, wikiId, collaborator).removeCollaborator();
 
-        if (authorized) {
-            Collaborator.destroy({
-                where: {
-                    userId: userId,
-                    wikiId: wikiId
+                if (authorized) {
+                    Collaborator.destroy({
+                        where: {
+                            userId: collaborator.id,
+                            wikiId: wikiId
+                        }
+                    })
+                        .then((deletedRecordsCount) => {
+                            callback(null, deletedRecordsCount);
+                        })
+                        .catch((err) => {
+                            callback(err);
+                        });
+                } else {
+                    req.flash("notice", "You are not authorized to do that.");
+                    callback(401);
                 }
             })
-                .then((deletedRecordsCount) => {
-                    callback(null, deletedRecordsCount);
-                })
-                .catch((err) => {
-                    callback(err);
-                });
-        } else {
-            req.flash("notice", "You are not authorized to do that.")
-            callback(401);
-        }
     }
-
-}
+}       

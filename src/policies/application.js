@@ -1,9 +1,10 @@
 module.exports = class ApplicationPolicy {
 
-     constructor(user, record) {
-       this.user = user;
-       this.record = record;
-     }
+    constructor(user, record, collaborator = null) {
+      this.user = user;
+      this.record = record;
+      this.collaborator = collaborator;
+    }
 
      _isOwner() {
         return this.record && (this.record.userId == this.user.id);
@@ -53,6 +54,10 @@ module.exports = class ApplicationPolicy {
 
      showCollaborators() {
       return this.edit();
+    }
+
+    removeCollaborator() {
+      return this._isAdmin() || this._isOwner();
     }
    }
    

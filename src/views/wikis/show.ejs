@@ -8,6 +8,7 @@
 
     <main class="container">
         <% include ../static/partials/messages.ejs %>
+        <br>
       <h1><%= wiki.title %></h1>
       
       <% if(currentUser) { %>
@@ -20,33 +21,37 @@
       <p><%- wiki.body %></p>
     
     <!-- Add Collaborator button -->
-    <% if(wiki.private) { %>
-    <form style="width: 400px" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
+    <hr>
+    <br>
+    <% if(currentUser.id === wiki.userId || currentUser.isAdmin) { %>
+      <form style="width: 400px" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
       <div class="input-group">
          <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
          <button type="submit" class="btn btn-primary">+ Add collaborators</button>
       </div>
     </form> 
+    <br>
     <% } %>
-       <!--<a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-primary">+ Add collaborators</a>-->
       
       <!-- show collaborators in a list -->
       <h6>Collaborators:</h6>
-        <% if(wiki.collaborators) { %>
+      <% if(wiki.collaborators) { %>
         <ul class="list-group">
-            <% wiki.collaborators.forEach((collaborator) => { %>
-              <li class="list-group-item">
-                  <small><%= collaborator.User.username %> </small>
-                  <% if(currentUser && (currentUser.role === "premium" || currentUser.role === "admin")) { %>
-                    <form action="/wikis/<%= collaborator.wikiId %>/collaborators/delete" method="post">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                        <input type="hidden" value="<%= collaborator.User.id %>" class="form-control" name="collaborator">
-                    </form>
-                    <% } %>
-              </li>
+            <% wiki.collaborators.forEach((collaborator) => {  %>
+            <li class="list-group-item">
+                <s>
+                    <%= collaborator.User.username %>
+                </h4>
+                <% if(currentUser && (currentUser.role === "premium" || currentUser.role === "admin")) { %>
+                <form style="width:25%" action="/wikis/<%= collaborator.wikiId %>/collaborators/delete" method="post">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <input type="hidden" value="<%= collaborator.User.id %>" class="form-control" name="collaborator">
+                </form>
+                <% } %>
+            </li>
             <% }) %>
-          </ul>
-        <% } %>
+        </ul>
+        <% } %> 
         <!-- end collaborators in a list -->
 
           
