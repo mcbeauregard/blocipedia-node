@@ -13,15 +13,25 @@ module.exports = {
         });
     },
 
-    delete(req, res, next){
+    /*delete(req, res, next){
             collaboratorQueries.deleteCollaborator(req, (err, collaborator) => { 
                 if(err){
                     req.flash("error", err);
                 }
                 res.redirect(req.headers.referer);
         });
-    },
+    },*/
 
+    
+    delete(req, res, next){
+        collaboratorQueries.deleteCollaborator(req.params.id, (err, deletedRecordsCount) => {
+          if(err){
+            res.redirect(500, `/wikis/${req.params.wikiId}/collaborators/${req.params.collabId}`)
+          } else {
+            res.redirect(303, `/wikis/${req.params.wikiId}`)
+          }
+        });
+      },
 
     show(req, res, next) {
         wikiQueries.getWiki(req.params.wikiId, (err, result) => {
