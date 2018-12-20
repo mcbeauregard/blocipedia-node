@@ -13,27 +13,14 @@ module.exports = {
         });
     },
 
-    /*delete(req, res, next){
+    delete(req, res, next){
             collaboratorQueries.deleteCollaborator(req, (err, collaborator) => { 
                 if(err){
                     req.flash("error", err);
                 }
                 res.redirect(req.headers.referer);
         });
-    },*/
-
-    delete(id, callback){
-        return Post. collaboratorQueries.deleteCollaborator({
-          where: { collabId }
-        })
-        .then((deletedRecordsCount) => {
-          callback(null, deletedRecordsCount);
-        })
-        .catch((err) => {
-          callback(err);
-        })
-      },
-   
+    },
 
     show(req, res, next) {
         wikiQueries.getWiki(req.params.wikiId, (err, result) => {
