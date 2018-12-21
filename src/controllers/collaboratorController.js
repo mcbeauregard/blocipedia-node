@@ -13,12 +13,12 @@ module.exports = {
         });
     },
 
-    delete(req, res, next){
-            collaboratorQueries.deleteCollaborator(req, (err, collaborator) => {  // error
-                if(err){
-                    req.flash("error", err);
-                }
-                res.redirect(req.headers.referer);
+    delete(req, res, next) {
+        collaboratorQueries.deleteCollaborator(req, (err, collaborator) => {  // error
+            if (err) {
+                req.flash("error", err);
+            }
+            res.redirect(req.headers.referer);
         });
     },
 

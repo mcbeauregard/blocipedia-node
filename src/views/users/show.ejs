@@ -7,21 +7,23 @@
         <% include ../static/partials/navbar.ejs %>
        <main class="container">
           <% include ../static/partials/messages.ejs %>
+          <br>
           <!-- User account info -->
-
           <h1>Account </h1>
+          <hr>
           <h3>Hello <%= currentUser.username %>!</h3>
-          <p>_______________________________________________________</p>
+          <hr>
           <h3>INFO:</h3>
           <h4><%= currentUser.email %></h4>
-          <p>_______________________________________________________</p>
+          <hr>
+          <hr>
           <h3>CURRENT PLAN:</h3>
-          
           <!-- END user account info -->
 
           <!-- upgrade user from standard to premium -->
           <% if(currentUser && (currentUser.role === "standard" || currentUser.role === "admin")) { %>
             <h4>Basic</h4>
+            <br>
             <header class="jumbotron my-3">
                 <h2>Change plan</h2>
                 <p>To create private wikis, upgrade your account to premium for $16.99.</p>

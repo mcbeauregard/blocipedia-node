@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {});
-  Collaborator.associate = function(models) {
+  
+  Collaborator.associate = function (models) {
     Collaborator.belongsTo(models.Wiki, {
       foreignKey: 'wikiId',
       onDelete: 'CASCADE'
@@ -21,23 +22,23 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Collaborator.addScope('collaboratorsFor', (wikiId) => {
-       return {
-         include: [{
-           model: models.User
-         }],
-         where: { wikiId: wikiId },
-         order: [['createdAt', 'ASC']]
-       }
+      return {
+        include: [{
+          model: models.User
+        }],
+        where: { wikiId: wikiId },
+        order: [['createdAt', 'ASC']]
+      }
     });
 
     Collaborator.addScope('collaborationsFor', (userId) => {
-       return {
-         include: [{
-           model: models.Wiki
-         }],
-         where: { userId: userId},
-         order: [['createdAt', 'ASC']]
-       }
+      return {
+        include: [{
+          model: models.Wiki
+        }],
+        where: { userId: userId },
+        order: [['createdAt', 'ASC']]
+      }
     });
   };
   return Collaborator;
