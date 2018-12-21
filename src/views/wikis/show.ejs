@@ -44,8 +44,26 @@
           </p>
         </div>
 
-        
-        
+        <!-- show collaborators in a list -->
+        <br>
+        <br>
+          <% if(wiki.collaborators) { %>
+          <ul class="list-group">
+            <% wiki.collaborators.forEach((collaborator) => {  %>
+            <li class="list-group-item">
+              <%= collaborator.User.username %>
+              <% if(currentUser && (currentUser.role === "premium" || currentUser.role === "admin")) { %>
+                <form style="float:right"  style="width:25%" action="/wikis/<%= collaborator.wikiId %>/collaborators/<%= collaborator.id %>/delete"
+                  method="post">
+                  <input type="hidden" value="<%= collaborator.User.id %>" class="form-control" name="collaborator">
+                  <button style="float:right" type="submit" class="btn btn-danger">Delete</button>
+                </form>
+              <% } %>
+            </li>
+            <% }) %>
+          </ul>
+          <% } %>
+    
       </main>
       <% include ../static/partials/baseScripts.ejs %>
     </body>
