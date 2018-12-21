@@ -24,8 +24,11 @@
             <div class="form-group">
               <label for="private">Wiki status</label>
               <select class="form-control" name="private" type="checkbox">
-                <option value="false" >Public wiki</option>
-                <option value="true">Private wiki</option>
+                <% if( wiki.private ) { %>
+                  <option value="true">Private wiki</option>
+                <% } else { %>
+                  <option value="false">Public wiki</option>
+                <% } %>
               </select>
             </div>
           <% } %>

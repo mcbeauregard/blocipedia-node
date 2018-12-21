@@ -63,11 +63,8 @@ module.exports = {
                 if (!wiki) {
                     return callback("Wiki not found");
                 }
-
                 const authorized = new Authorizer(req.user, wiki).update();
-
                 if (authorized) {
-
                     wiki.update(updatedWiki, {
                         fields: Object.keys(updatedWiki)
                     })
@@ -104,7 +101,7 @@ module.exports = {
         return Wiki.all()
             .then((wikis) => {
                 wikis.forEach((wiki) => {
-                    if (wiki.userId == id && wiki.private == true) {
+                    if (wiki.userId == id && wiki.private == false) {
                         wiki.update({
                             private: false
                         })

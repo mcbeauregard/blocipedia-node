@@ -117,6 +117,10 @@ module.exports = {
     res.render("users/downgradeShow");
   },
 
+  downgradeWikis(req,res, next){
+    wikiQueries.changeWikiToPrivate(req.user.dataValues.id);
+  },
+
   payment(req, res, next) {
     res.render("users/payment");
   },
