@@ -44,7 +44,7 @@ module.exports = {
         let id = req.params.id;
         let wikiId = req.params.wikiId;
         const authorized = new Authorizer(req.user, wikiId, req.user.id).destroy();
-       
+
         if (authorized) {
             Collaborator.destroy({
                 where: {

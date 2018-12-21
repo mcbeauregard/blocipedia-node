@@ -23,8 +23,8 @@
           <% if( currentUser.isPremium() || currentUser.isAdmin() ) { %>
             <div class="form-group">
               <label for="private">Wiki status</label>
-              <select class="form-control" name="private">
-                <option value="false">Public wiki</option>
+              <select class="form-control" name="private" type="checkbox">
+                <option value="false" >Public wiki</option>
                 <option value="true">Private wiki</option>
               </select>
             </div>

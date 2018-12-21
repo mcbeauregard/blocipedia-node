@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       allowNull: false
-        },
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: "standard"
     }
   }, {});
-  User.associate = function(models) {
+  User.associate = function (models) {
 
     User.hasMany(models.Wiki, {
       foreignKey: "userId",
@@ -34,15 +34,15 @@ module.exports = (sequelize, DataTypes) => {
       as: "collaborators"
     });
 
-    User.prototype.isStandard = function() {
+    User.prototype.isStandard = function () {
       return this.role === "standard";
     };
 
-    User.prototype.isPremium = function() {
+    User.prototype.isPremium = function () {
       return this.role === "premium";
     };
 
-    User.prototype.isAdmin = function() {
+    User.prototype.isAdmin = function () {
       return this.role === "admin";
     };
   };
