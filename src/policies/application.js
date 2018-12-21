@@ -1,57 +1,57 @@
 module.exports = class ApplicationPolicy {
 
-  constructor(user, record, collaborators) {
+  constructor(user, record, collaborator = null) {
     this.user = user;
     this.record = record;
+    this.collaborator = collaborator;
   }
 
-  _isOwner() {
-    return this.record && (this.record.userId == this.user.id);
-  }
+   _isOwner() {
+      return this.record && (this.record.userId == this.user.id);
+    }
 
-  _isAdmin() {
-    return this.user && this.user.role == "admin";
-  }
+   _isPremium() {
+     return this.user && this.user.role == "premium";
+   }
 
-  _isPremium() {
-    return this.user && this.user.role == "premium";
-  }
+   _isAdmin() {
+      return this.user && this.user.role == "admin";
+    }
 
-  _isStandard() {
-    return this.user && this.user.role == "standard";
-  }
-
-  new() {
-    return this.user != null;
-  }
-
-  create() {
+   _isStandard() {
+      return this.user && this.user.role == "standard";
+   }
+ 
+   new() {
+     return this.user != null;
+   }
+ 
+   create() {
+     return this.new();
+   }
+ 
+   show() {
+     return true;
+   }
+ 
+   edit() {
     return this.new();
   }
+ 
+   update() {
+     return this.edit();
+   }
+ 
+   destroy() {
+     return this.update();
+   }
 
-  show() {
-    return true;
-  }
-
-  edit() {
-    if (this.record.private == false) {
-    return this.new() &&
-      this.record && (this._isStandard() || this._isPremium() || this._isAdmin());
-    } else if (this.record.private == true) {
-      return this.new() &&
-        this.record && (this._isPremium()  || this._isAdmin() || this._isStandard());
-    }
-  }
-
-  showCollaborators() {
+   showCollaborators() {
     return this.edit();
   }
 
-  update() {
-    return this.edit();
+  removeCollaborator() {
+   return this._isAdmin() || this._isOwner();
   }
-
-  destroy() {
-    return this.update();
-  }
-}
+ }
+ 
