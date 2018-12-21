@@ -129,6 +129,7 @@ module.exports = {
       userQueries.getUser(req.user.id, (err, result) => {
         user = result["user"];
         collaborations = result["collaborations"];
+        console.dir(req);
           if (err || user == null) {
             res.redirect(404, "/");
           } else {

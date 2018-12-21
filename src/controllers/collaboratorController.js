@@ -32,7 +32,7 @@ module.exports = {
             } else {
                 const authorized = new Authorizer(req.user, wiki, collaborations).edit();
                 if (authorized) {
-                    res.render("collaborators/show", { wiki, collaborations });
+                    res.render("users/collaborations", { wiki, collaborations });
                 } else {
                     req.flash("notice", "You are not authorized to do that.");
                     res.redirect(`/wikis/${req.params.wikiId}`)
