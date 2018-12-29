@@ -4,4 +4,4 @@
 View the app here: https://mcbeauregard-blocipedia-node.herokuapp.com/
 
 <h2>Set up instructions</h2>
-<p>When installing the application locally, be sure to create a database called blocipedia. Otherwise, when signin up a new users, you'll get the error "SequelizeConnectionError: database "blocipedia" does not exist."</p>
+<p>When installing the application locally, be sure to create a database called blocipedia. Otherwise, when signing-up a new users, you may get the error "SequelizeConnectionError: database "blocipedia" does not exist."</p>
